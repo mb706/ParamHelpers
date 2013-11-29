@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Get lower / upper bounds and allowed discrete values for...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+<script src="http://yandex.st/highlightjs/7.3/languages/r.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for getLower {ParamHelpers}"><tr><td>getLower {ParamHelpers}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Get lower / upper bounds and allowed discrete values for parameters.</h2>
+
+<h3>Description</h3>
+
+<p><code>getLower</code> and <code>getUpper</code> return a numerical
+vector of lower and upper bounds, <code>getValues</code>
+returns a list of possible value sets for discrete
+parameters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  getLower(par.set, with.nr = FALSE)
+
+  getUpper(par.set, with.nr = FALSE)
+
+  getValues(par.set)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>par.set</code></td>
+<td>
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter
+set.</p>
+</td></tr>
+<tr valign="top"><td><code>with.nr</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br> Should number from
+1 to length be appended to names of vector params?
+Default is <code>FALSE</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Parameters for which such bound make no sense - due to
+their type - are not present in the result.
+</p>
+
+
+<h3>Value</h3>
+
+<p>[<code>vector</code> | <code>list</code>]. Named by parameter ids.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+ps &lt;- makeParamSet(
+  makeNumericParam(&quot;u&quot;),
+  makeIntegerParam(&quot;v&quot;, lower=1, upper=2),
+  makeDiscreteParam(&quot;w&quot;, values=1:2),
+  makeNumericVectorParam(&quot;x&quot;, len=2, lower=c(0, 10), upper=c(1, 11))
+)
+getLower(ps)
+</code></pre>
+
+<pre><code>##    u    v    x    x 
+## -Inf    1    0   10
+</code></pre>
+
+<pre><code class="r">getUpper(ps)
+</code></pre>
+
+<pre><code>##   u   v   x   x 
+## Inf   2   1  11
+</code></pre>
+
+<pre><code class="r">
+ps &lt;- makeParamSet(
+  makeNumericParam(&quot;u&quot;),
+  makeDiscreteParam(&quot;v&quot;, values=c(&quot;a&quot;, &quot;b&quot;)),
+  makeDiscreteParam(&quot;w&quot;, values=list(a=list(), b=NULL))
+)
+getValues(ps)
+</code></pre>
+
+<pre><code>## $v
+## $v$a
+## [1] &quot;a&quot;
+## 
+## $v$b
+## [1] &quot;b&quot;
+## 
+## 
+## $w
+## $w$a
+## list()
+## 
+## $w$b
+## NULL
+</code></pre>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>ParamHelpers</em> version 1.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Create a description object for a parameter of a machine...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for LearnerParam {ParamHelpers}"><tr><td>LearnerParam {ParamHelpers}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Create a description object for a parameter of a machine learning algorithm.</h2>
+
+<h3>Description</h3>
+
+<p>This specializes <code><a href="Param.html">Param</a></code> by adding a few more
+attributes, like a default value, whether it refers to a
+training or a predict function, etc.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  makeNumericLearnerParam(id, lower = -Inf, upper = Inf,
+    default, when = "train", requires = NULL)
+
+  makeNumericVectorLearnerParam(id, len = as.integer(NA),
+    lower = -Inf, upper = Inf, default, when = "train",
+    requires = NULL)
+
+  makeIntegerLearnerParam(id, lower = -Inf, upper = Inf,
+    default, when = "train", requires = NULL)
+
+  makeIntegerVectorLearnerParam(id, len = as.integer(NA),
+    lower = -Inf, upper = Inf, default, when = "train",
+    requires = NULL)
+
+  makeDiscreteLearnerParam(id, values, default,
+    when = "train", requires = NULL)
+
+  makeDiscreteVectorLearnerParam(id, len = as.integer(NA),
+    values, default, when = "train", requires = NULL)
+
+  makeLogicalLearnerParam(id, default, when = "train",
+    requires = NULL)
+
+  makeLogicalVectorLearnerParam(id, len = as.integer(NA),
+    default, when = "train", requires = NULL)
+
+  makeUntypedLearnerParam(id, default, when = "train",
+    requires = NULL)
+
+  makeFunctionLearnerParam(id, default, when = "train",
+    requires = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>[<code>character(1)</code>]<br> See
+<code><a href="Param.html">Param</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>len</code></td>
+<td>
+<p>[<code>integer(1)</code>]<br> See
+<code><a href="Param.html">Param</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lower</code></td>
+<td>
+<p>[<code>numeric</code>]<br> See
+<code><a href="Param.html">Param</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>upper</code></td>
+<td>
+<p>[<code>numeric</code>]<br> See
+<code><a href="Param.html">Param</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>values</code></td>
+<td>
+<p>[<code>vector</code> | <code>list</code>]<br> See
+<code><a href="Param.html">Param</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>requires</code></td>
+<td>
+<p>[<code>NULL</code> | R expression]<br> See
+<code><a href="Param.html">Param</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>default</code></td>
+<td>
+<p>[any]<br> Default value used in learner.
+If this argument is missing, it means no default value is
+available.</p>
+</td></tr>
+<tr valign="top"><td><code>when</code></td>
+<td>
+<p>[<code>character(1)</code>]<br> Specifies when
+parameter is used in the learner: &ldquo;train&rdquo;,
+&ldquo;predict&rdquo; or &ldquo;both&rdquo;.  Default is
+&ldquo;train&rdquo;.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The S3 class is a <code><a href="Param.html">Param</a></code> which additionally
+stores these elements: </p>
+ <dl>
+<dt>default
+[any]</dt><dd><p>See argument of same name.</p>
+</dd> <dt>has.default
+[<code>logical(1)</code>]</dt><dd><p>Was a default value provided?</p>
+</dd>
+<dt>when [<code>character(1)</code>]</dt><dd><p>See argument of same
+name.</p>
+</dd> </dl>
+
+
+
+<h3>Value</h3>
+
+<p>[<code><a href="LearnerParam.html">LearnerParam</a></code>].
+</p>
+
+<hr><div align="center">[Package <em>ParamHelpers</em> version 1.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

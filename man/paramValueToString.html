@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Convert a value to a string.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+<script src="http://yandex.st/highlightjs/7.3/languages/r.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for paramValueToString {ParamHelpers}"><tr><td>paramValueToString {ParamHelpers}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Convert a value to a string.</h2>
+
+<h3>Description</h3>
+
+<p>Useful helper for logging. For discrete parameter values
+always the name of the discrete value is used.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  paramValueToString(par, x, show.missing.values = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>par</code></td>
+<td>
+<p>[<code><a href="Param.html">Param</a></code> |
+<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter or parameter set.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>[any]<br> Value for parameter or value for
+parameter set. In the latter case it must be named list.</p>
+</td></tr>
+<tr valign="top"><td><code>show.missing.values</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br> Display
+&ldquo;NA&rdquo; for parameters, which have no setting,
+because their requirements are not satified (dependent
+parameters), instead of nothing?  Default is
+<code>FALSE</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>[<code>character(1)</code>].
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+p &lt;- makeNumericParam(&quot;x&quot;)
+paramValueToString(p, 1) # &quot;1.00&quot;
+</code></pre>
+
+<pre><code>## [1] &quot;1.00&quot;
+</code></pre>
+
+<pre><code class="r">paramValueToString(p, 1.2345) # &quot;1.23&quot;
+</code></pre>
+
+<pre><code>## [1] &quot;1.23&quot;
+</code></pre>
+
+<pre><code class="r">
+p &lt;- makeIntegerVectorParam(&quot;x&quot;, len=2)
+paramValueToString(p, c(1L, 2L)) # 1,2
+</code></pre>
+
+<pre><code>## [1] &quot;1,2&quot;
+</code></pre>
+
+<pre><code class="r">
+p &lt;- makeLogicalParam(&quot;x&quot;)
+paramValueToString(p, TRUE) # &quot;TRUE&quot;
+</code></pre>
+
+<pre><code>## [1] &quot;TRUE&quot;
+</code></pre>
+
+<pre><code class="r">
+p &lt;- makeDiscreteParam(&quot;x&quot;, values=list(a=NULL, b=2))
+paramValueToString(p, NULL) # &quot;a&quot;
+</code></pre>
+
+<pre><code>## [1] &quot;a&quot;
+</code></pre>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>ParamHelpers</em> version 1.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

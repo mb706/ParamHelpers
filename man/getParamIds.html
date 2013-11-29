@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Return ids of parameters in parameter set.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+<script src="http://yandex.st/highlightjs/7.3/languages/r.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for getParamIds {ParamHelpers}"><tr><td>getParamIds {ParamHelpers}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Return ids of parameters in parameter set.</h2>
+
+<h3>Description</h3>
+
+<p>Useful if vectors are included.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  getParamIds(par.set, repeated = FALSE, with.nr = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>par.set</code></td>
+<td>
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter
+set.</p>
+</td></tr>
+<tr valign="top"><td><code>repeated</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br> Should ids be
+repeated length-times if parameter is a vector?  Default
+is <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>with.nr</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br> Should number from
+1 to length be appended to id if <code>repeated</code> is
+<code>TRUE</code>?  Otherwise ignored.  Default is
+<code>FALSE</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>[<code>character</code>].
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+ps &lt;- makeParamSet(
+  makeNumericParam(&quot;u&quot;),
+  makeIntegerVectorParam(&quot;v&quot;, len=2)
+)
+getParamIds(ps)
+</code></pre>
+
+<pre><code>## [1] &quot;u&quot; &quot;v&quot;
+</code></pre>
+
+<pre><code class="r">getParamIds(ps, repeated=TRUE)
+</code></pre>
+
+<pre><code>## [1] &quot;u&quot; &quot;v&quot; &quot;v&quot;
+</code></pre>
+
+<pre><code class="r">getParamIds(ps, repeated=TRUE, with.nr=TRUE)
+</code></pre>
+
+<pre><code>## [1] &quot;u&quot;  &quot;v1&quot; &quot;v2&quot;
+</code></pre>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>ParamHelpers</em> version 1.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

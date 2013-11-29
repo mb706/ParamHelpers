@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Get parameter subset of only certain parameters.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+<script src="http://yandex.st/highlightjs/7.3/languages/r.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for filterParams {ParamHelpers}"><tr><td>filterParams {ParamHelpers}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Get parameter subset of only certain parameters.</h2>
+
+<h3>Description</h3>
+
+<p>Parameter order is not changed.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  filterParams(par.set, type)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>par.set</code></td>
+<td>
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter
+set.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>[<code>character</code>]<br> Vector of allowed
+types, subset of: &ldquo;numeric&rdquo;, &ldquo;integer&rdquo;,
+&ldquo;numericvector&rdquo;, &ldquo;integervector&rdquo;,
+&ldquo;discrete&rdquo;, &ldquo;discretevector&rdquo;,
+&ldquo;logical&rdquo;, &ldquo;logicalvector&rdquo;,
+&ldquo;function&rdquo;, &ldquo;untyped&rdquo;.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>].
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+
+ps <- makeParamSet(
+  makeNumericParam("u", lower=1),
+  makeIntegerParam("v", lower=1, upper=2),
+  makeDiscreteParam("w", values=1:2),
+  makeLogicalParam("x"),
+  makeNumericParam("y")
+)
+# filter for numeric parameters
+filterParams(ps, "numeric")
+# filter for numeric and integer parameters
+filterParams(ps, c("integer","numeric"))
+
+
+
+</code></pre>
+
+<hr><div align="center">[Package <em>ParamHelpers</em> version 1.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

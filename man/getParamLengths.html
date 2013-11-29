@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Return lengths of parameters in parameter set.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+<script src="http://yandex.st/highlightjs/7.3/languages/r.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for getParamLengths {ParamHelpers}"><tr><td>getParamLengths {ParamHelpers}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Return lengths of parameters in parameter set.</h2>
+
+<h3>Description</h3>
+
+<p>Useful for vector parameters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  getParamLengths(par.set)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>par.set</code></td>
+<td>
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter
+set.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>[<code>integer</code>]. Named and in same order as
+<code>par.set</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+ps &lt;- makeParamSet(
+  makeNumericParam(&quot;u&quot;),
+  makeIntegerParam(&quot;v&quot;, lower=1, upper=2),
+  makeDiscreteParam(&quot;w&quot;, values=1:2),
+  makeDiscreteVectorParam(&quot;x&quot;, len=2, values=c(&quot;a&quot;, &quot;b&quot;))
+)
+getParamLengths(ps)
+</code></pre>
+
+<pre><code>## u v w x 
+## 1 1 1 2
+</code></pre>
+
+<pre><code class="r"># the length of the vector x is 2, for all other single value parameters the length is 1.
+
+</code></pre>
+
+
+<hr><div align="center">[Package <em>ParamHelpers</em> version 1.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

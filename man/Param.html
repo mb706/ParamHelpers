@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Create a description object for a parameter.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+<script src="http://yandex.st/highlightjs/7.3/languages/r.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for Param {ParamHelpers}"><tr><td>Param {ParamHelpers}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Create a description object for a parameter.</h2>
+
+<h3>Description</h3>
+
+<p>For each parameter type a special constructor function is
+available, see below.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  makeNumericParam(id, lower = -Inf, upper = Inf,
+    trafo = NULL, requires = NULL)
+
+  makeNumericVectorParam(id, len, lower = -Inf,
+    upper = Inf, trafo = NULL, requires = NULL)
+
+  makeIntegerParam(id, lower = -Inf, upper = Inf,
+    trafo = NULL, requires = NULL)
+
+  makeIntegerVectorParam(id, len, lower = -Inf,
+    upper = Inf, trafo = NULL, requires = NULL)
+
+  makeLogicalParam(id, requires = NULL)
+
+  makeLogicalVectorParam(id, len, requires = NULL)
+
+  makeDiscreteParam(id, values, requires = NULL)
+
+  makeDiscreteVectorParam(id, len, values, requires = NULL)
+
+  makeFunctionParam(id, requires = NULL)
+
+  makeUntypedParam(id, requires = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>[<code>character(1)</code>]<br> Name of parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>len</code></td>
+<td>
+<p>[<code>integer(1)</code>]<br> Length of vector
+parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>lower</code></td>
+<td>
+<p>[<code>numeric</code>]<br> Lower bounds.  A singe
+value of length 1 is automatically replicated to
+<code>len</code> for vector parameters.  Default is
+<code>-Inf</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>upper</code></td>
+<td>
+<p>[<code>numeric</code>]<br> Upper bounds.  A singe
+value of length 1 is automatically replicated to
+<code>len</code> for vector parameters.  Default is
+<code>Inf</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>values</code></td>
+<td>
+<p>[<code>vector</code> | <code>list</code>]<br> Possible
+discrete values. Instead of using a vector of atomic
+values, you are also allowed to pass a list of quite
+&ldquo;complex&rdquo; R objects, which are used as discrete
+choices. If you do the latter, the elements must be
+uniquely named, so that the names can be used as internal
+represenatations for the choice.</p>
+</td></tr>
+<tr valign="top"><td><code>trafo</code></td>
+<td>
+<p>[<code>NULL</code> | <code>function(x)</code>]<br>
+Function to transform parameter. It should be applied to
+the parameter value before it is, e.g., passed to a
+corresponding objective function.  Function must accept a
+parameter value as the first argument and return a
+transformed one.  Default is <code>NULL</code> which means no
+transformation.</p>
+</td></tr>
+<tr valign="top"><td><code>requires</code></td>
+<td>
+<p>[<code>NULL</code> | R expression]<br> States
+requirements on other paramaters' values, so that setting
+this parameter only makes sense if its requirements are
+satisfied (dependent parameter).  Only really useful if
+the parameter is included in a <code><a href="makeParamSet.html">ParamSet</a></code>.
+Default is <code>NULL</code> which means no requirements.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The S3 class is a list which stores these elements:
+</p>
+ <dl>
+<dt>id [<code>character(1)</code>]</dt><dd><p>See argument
+of same name.</p>
+</dd> <dt>type [<code>character(1)</code>]</dt><dd><p>Data
+type of parameter. Possible types are &ldquo;numeric&rdquo;,
+&ldquo;numericvector&rdquo;, &ldquo;integer&rdquo;,
+&ldquo;integervector&rdquo;, &ldquo;logical&rdquo;,
+&ldquo;logicalvector&rdquo;, &ldquo;discrete&rdquo;,
+&ldquo;discretevector&rdquo;, &ldquo;function&rdquo;,
+&ldquo;untyped&rdquo;.</p>
+</dd> <dt>len [<code>integer(1)</code>]</dt><dd><p>See
+argument of same name.</p>
+</dd> <dt>lower [<code>numeric</code>]</dt><dd><p>See
+argument of same name. Length of this vector is
+<code>len</code>.</p>
+</dd> <dt>upper [<code>numeric</code>]</dt><dd><p>See argument
+of same name. Length of this vector is <code>len</code>.</p>
+</dd>
+<dt>values [<code>list</code>]</dt><dd><p>Discrete values, always
+stored as a named list.</p>
+</dd> <dt>trafo [<code>NULL</code> |
+<code>function(x)</code>]</dt><dd><p>See argument of same name.</p>
+</dd>
+<dt>requires [<code>NULL</code> | <code>expression</code>]</dt><dd><p>See
+argument of same name.</p>
+</dd> </dl>
+
+
+
+<h3>Value</h3>
+
+<p>[<code><a href="Param.html">Param</a></code>].
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+makeNumericParam(&quot;x&quot;,lower=-1, upper=1)
+</code></pre>
+
+<pre><code>## Num param &#39;x&#39;. Constr: -1 to 1. Trafo: FALSE. Requires: FALSE
+</code></pre>
+
+<pre><code class="r">makeNumericVectorParam(&quot;x&quot;, len=2)
+</code></pre>
+
+<pre><code>## Num vec param &#39;x&#39;. Len: 2. Constr: -Inf,-Inf to Inf,Inf. Trafo: FALSE. Requires: FALSE
+</code></pre>
+
+<pre><code class="r">makeDiscreteParam(&quot;y&quot;, values=c(&quot;a&quot;,&quot;b&quot;))
+</code></pre>
+
+<pre><code>## Disc param &#39;y&#39;. Vals: a,b. Trafo: FALSE. Requires: FALSE
+</code></pre>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>ParamHelpers</em> version 1.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

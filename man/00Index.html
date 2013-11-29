@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Helpers for parameters in black-box optimization, tuning and
+machine learning.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+<h1> Helpers for parameters in black-box optimization, tuning and
+machine learning.
+<img class="toplogo" src="http://stat.ethz.ch/R-manual/R-devel/doc/html/logo.jpg" alt="[R logo]">
+</h1>
+<hr>
+<div align="center">
+<a href="http://stat.ethz.ch/R-manual/R-devel/doc/html/packages.html"><img src="http://stat.ethz.ch/R-manual/R-devel/doc/html/left.jpg" alt="[Up]" width="30" height="30" border="0"></a>
+<a href="http://stat.ethz.ch/R-manual/R-devel/doc/html/index.html"><img src="http://stat.ethz.ch/R-manual/R-devel/doc/html/up.jpg" alt="[Top]" width="30" height="30" border="0"></a>
+</div><h2>Documentation for package &lsquo;ParamHelpers&rsquo; version 1.2</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../NEWS">Package NEWS</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<table width="100%">
+<tr><td width="25%"><a href="addOptPathEl.html">addOptPathEl</a></td>
+<td>Add a new element to an optimization path.</td></tr>
+<tr><td width="25%"><a href="convertParamSetToIrace.html">convertParamSetToIrace</a></td>
+<td>Converts a ParamSet object to a parameter object of the irace package.</td></tr>
+<tr><td width="25%"><a href="dfRowsToList.html">dfRowsToList</a></td>
+<td>Convert a data.frame row to list of parameter-value-lists.</td></tr>
+<tr><td width="25%"><a href="dfRowsToList.html">dfRowToList</a></td>
+<td>Convert a data.frame row to list of parameter-value-lists.</td></tr>
+<tr><td width="25%"><a href="discreteNameToValue.html">discreteNameToValue</a></td>
+<td>Convert encoding name(s) to discrete value(s).</td></tr>
+<tr><td width="25%"><a href="discreteValueToName.html">discreteValueToName</a></td>
+<td>Convert discrete value(s) to encoding name(s).</td></tr>
+<tr><td width="25%"><a href="filterParams.html">filterParams</a></td>
+<td>Get parameter subset of only certain parameters.</td></tr>
+<tr><td width="25%"><a href="generateDesign.html">generateDesign</a></td>
+<td>Generates a statistical design for a parameter set.</td></tr>
+<tr><td width="25%"><a href="getLower.html">getLower</a></td>
+<td>Get lower / upper bounds and allowed discrete values for parameters.</td></tr>
+<tr><td width="25%"><a href="getOptPathBestIndex.html">getOptPathBestIndex</a></td>
+<td>Get index of the best element from optimization path.</td></tr>
+<tr><td width="25%"><a href="getOptPathDOB.html">getOptPathDOB</a></td>
+<td>Get date-of-birth vector from the optimization path.</td></tr>
+<tr><td width="25%"><a href="getOptPathEl.html">getOptPathEl</a></td>
+<td>Get an element from the optimization path.</td></tr>
+<tr><td width="25%"><a href="getOptPathEOL.html">getOptPathEOL</a></td>
+<td>Get end-of-life vector from the optimization path.</td></tr>
+<tr><td width="25%"><a href="getOptPathLength.html">getOptPathLength</a></td>
+<td>Get the length of the optimization path.</td></tr>
+<tr><td width="25%"><a href="getOptPathY.html">getOptPathY</a></td>
+<td>Get y vector from the optimization path.</td></tr>
+<tr><td width="25%"><a href="getParamIds.html">getParamIds</a></td>
+<td>Return ids of parameters in parameter set.</td></tr>
+<tr><td width="25%"><a href="getParamLengths.html">getParamLengths</a></td>
+<td>Return lengths of parameters in parameter set.</td></tr>
+<tr><td width="25%"><a href="getTypes.html">getTypes</a></td>
+<td>Returns type information for a parameter set.</td></tr>
+<tr><td width="25%"><a href="getLower.html">getUpper</a></td>
+<td>Get lower / upper bounds and allowed discrete values for parameters.</td></tr>
+<tr><td width="25%"><a href="getLower.html">getValues</a></td>
+<td>Get lower / upper bounds and allowed discrete values for parameters.</td></tr>
+<tr><td width="25%"><a href="hasRequires.html">hasRequires</a></td>
+<td>Check parameter / parameter set for requirements / dependencies.</td></tr>
+<tr><td width="25%"><a href="isFeasible.html">isFeasible</a></td>
+<td>Check if parameter value is valid.</td></tr>
+<tr><td width="25%"><a href="LearnerParam.html">LearnerParam</a></td>
+<td>Create a description object for a parameter of a machine learning algorithm.</td></tr>
+<tr><td width="25%"><a href="LearnerParam.html">makeDiscreteLearnerParam</a></td>
+<td>Create a description object for a parameter of a machine learning algorithm.</td></tr>
+<tr><td width="25%"><a href="Param.html">makeDiscreteParam</a></td>
+<td>Create a description object for a parameter.</td></tr>
+<tr><td width="25%"><a href="LearnerParam.html">makeDiscreteVectorLearnerParam</a></td>
+<td>Create a description object for a parameter of a machine learning algorithm.</td></tr>
+<tr><td width="25%"><a href="Param.html">makeDiscreteVectorParam</a></td>
+<td>Create a description object for a parameter.</td></tr>
+<tr><td width="25%"><a href="LearnerParam.html">makeFunctionLearnerParam</a></td>
+<td>Create a description object for a parameter of a machine learning algorithm.</td></tr>
+<tr><td width="25%"><a href="Param.html">makeFunctionParam</a></td>
+<td>Create a description object for a parameter.</td></tr>
+<tr><td width="25%"><a href="LearnerParam.html">makeIntegerLearnerParam</a></td>
+<td>Create a description object for a parameter of a machine learning algorithm.</td></tr>
+<tr><td width="25%"><a href="Param.html">makeIntegerParam</a></td>
+<td>Create a description object for a parameter.</td></tr>
+<tr><td width="25%"><a href="LearnerParam.html">makeIntegerVectorLearnerParam</a></td>
+<td>Create a description object for a parameter of a machine learning algorithm.</td></tr>
+<tr><td width="25%"><a href="Param.html">makeIntegerVectorParam</a></td>
+<td>Create a description object for a parameter.</td></tr>
+<tr><td width="25%"><a href="LearnerParam.html">makeLogicalLearnerParam</a></td>
+<td>Create a description object for a parameter of a machine learning algorithm.</td></tr>
+<tr><td width="25%"><a href="Param.html">makeLogicalParam</a></td>
+<td>Create a description object for a parameter.</td></tr>
+<tr><td width="25%"><a href="LearnerParam.html">makeLogicalVectorLearnerParam</a></td>
+<td>Create a description object for a parameter of a machine learning algorithm.</td></tr>
+<tr><td width="25%"><a href="Param.html">makeLogicalVectorParam</a></td>
+<td>Create a description object for a parameter.</td></tr>
+<tr><td width="25%"><a href="LearnerParam.html">makeNumericLearnerParam</a></td>
+<td>Create a description object for a parameter of a machine learning algorithm.</td></tr>
+<tr><td width="25%"><a href="Param.html">makeNumericParam</a></td>
+<td>Create a description object for a parameter.</td></tr>
+<tr><td width="25%"><a href="makeParamSet.html">makeNumericParamSet</a></td>
+<td>Construct a parameter set.</td></tr>
+<tr><td width="25%"><a href="LearnerParam.html">makeNumericVectorLearnerParam</a></td>
+<td>Create a description object for a parameter of a machine learning algorithm.</td></tr>
+<tr><td width="25%"><a href="Param.html">makeNumericVectorParam</a></td>
+<td>Create a description object for a parameter.</td></tr>
+<tr><td width="25%"><a href="OptPath.html">makeOptPathDF</a></td>
+<td>Create optimization path.</td></tr>
+<tr><td width="25%"><a href="makeParamSet.html">makeParamSet</a></td>
+<td>Construct a parameter set.</td></tr>
+<tr><td width="25%"><a href="LearnerParam.html">makeUntypedLearnerParam</a></td>
+<td>Create a description object for a parameter of a machine learning algorithm.</td></tr>
+<tr><td width="25%"><a href="Param.html">makeUntypedParam</a></td>
+<td>Create a description object for a parameter.</td></tr>
+<tr><td width="25%"><a href="OptPath.html">OptPath</a></td>
+<td>Create optimization path.</td></tr>
+<tr><td width="25%"><a href="OptPath.html">OptPathDF</a></td>
+<td>Create optimization path.</td></tr>
+<tr><td width="25%"><a href="Param.html">Param</a></td>
+<td>Create a description object for a parameter.</td></tr>
+<tr><td width="25%"><a href="makeParamSet.html">ParamSet</a></td>
+<td>Construct a parameter set.</td></tr>
+<tr><td width="25%"><a href="paramValueToString.html">paramValueToString</a></td>
+<td>Convert a value to a string.</td></tr>
+<tr><td width="25%"><a href="removeMissingValues.html">removeMissingValues</a></td>
+<td>Removes all scalar NAs from a parameter setting list.</td></tr>
+<tr><td width="25%"><a href="sampleValue.html">sampleValue</a></td>
+<td>Sample a random value from a parameter or a parameter set uniformly.</td></tr>
+<tr><td width="25%"><a href="sampleValues.html">sampleValues</a></td>
+<td>Sample n random values from a parameter or a parameter set uniformly.</td></tr>
+<tr><td width="25%"><a href="setOptPathElDOB.html">setOptPathElDOB</a></td>
+<td>Set the dates of birth of parameter values, in-place.</td></tr>
+<tr><td width="25%"><a href="setOptPathElEOL.html">setOptPathElEOL</a></td>
+<td>Set the end of life dates of parameter values, in-place.</td></tr>
+<tr><td width="25%"><a href="trafoOptPath.html">trafoOptPath</a></td>
+<td>Transform optimization path.</td></tr>
+<tr><td width="25%"><a href="trafoValue.html">trafoValue</a></td>
+<td>Transform a value.</td></tr>
+</table>
+</body></html>
