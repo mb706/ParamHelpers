@@ -22,7 +22,7 @@
 <h3>Usage</h3>
 
 <pre>
-  getParamIds(par.set, repeated = FALSE, with.nr = FALSE)
+getParamIds(par.set, repeated = FALSE, with.nr = FALSE)
 </pre>
 
 
@@ -31,21 +31,21 @@
 <table summary="R argblock">
 <tr valign="top"><td><code>par.set</code></td>
 <td>
-<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter
-set.</p>
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br>
+Parameter set.</p>
 </td></tr>
 <tr valign="top"><td><code>repeated</code></td>
 <td>
-<p>[<code>logical(1)</code>]<br> Should ids be
-repeated length-times if parameter is a vector?  Default
-is <code>FALSE</code>.</p>
+<p>[<code>logical(1)</code>]<br>
+Should ids be repeated length-times if parameter is a vector?
+Default is <code>FALSE</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>with.nr</code></td>
 <td>
-<p>[<code>logical(1)</code>]<br> Should number from
-1 to length be appended to id if <code>repeated</code> is
-<code>TRUE</code>?  Otherwise ignored.  Default is
-<code>FALSE</code>.</p>
+<p>[<code>logical(1)</code>]<br>
+Should number from 1 to length be appended to id if <code>repeated</code> is <code>TRUE</code>?
+Otherwise ignored.
+Default is <code>FALSE</code>.</p>
 </td></tr>
 </table>
 
@@ -58,10 +58,9 @@ is <code>FALSE</code>.</p>
 
 <h3>Examples</h3>
 
-<pre><code class="r">
-ps &lt;- makeParamSet(
+<pre><code class="r">ps = makeParamSet(
   makeNumericParam(&quot;u&quot;),
-  makeIntegerVectorParam(&quot;v&quot;, len=2)
+  makeIntegerVectorParam(&quot;v&quot;, len = 2)
 )
 getParamIds(ps)
 </code></pre>
@@ -69,19 +68,16 @@ getParamIds(ps)
 <pre><code>## [1] &quot;u&quot; &quot;v&quot;
 </code></pre>
 
-<pre><code class="r">getParamIds(ps, repeated=TRUE)
+<pre><code class="r">getParamIds(ps, repeated = TRUE)
 </code></pre>
 
 <pre><code>## [1] &quot;u&quot; &quot;v&quot; &quot;v&quot;
 </code></pre>
 
-<pre><code class="r">getParamIds(ps, repeated=TRUE, with.nr=TRUE)
+<pre><code class="r">getParamIds(ps, repeated = TRUE, with.nr = TRUE)
 </code></pre>
 
 <pre><code>## [1] &quot;u&quot;  &quot;v1&quot; &quot;v2&quot;
-</code></pre>
-
-<pre><code class="r">
 </code></pre>
 
 

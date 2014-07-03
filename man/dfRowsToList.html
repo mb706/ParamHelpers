@@ -10,22 +10,43 @@
 
 <h3>Description</h3>
 
-<p>Please note that (naturally) the columns of <code>df</code>
-have to be of the correct type type w.r.t. the
-corresponding parameter. The only exception are integer
-parameters where the corresponding columns in <code>df</code>
-are allowed to be numerics. Dependent parameters whose
-requirements are not satisfied are represented by a
-scalar NA in the output.
+<p>Please note that (naturally) the columns of <code>df</code> have to be of the correct type
+type w.r.t. the corresponding parameter. The only exception are integer parameters
+where the corresponding columns in <code>df</code> are allowed to be numerics.
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td align="left">
+ numeric(vector)   </td><td align="left">  <code>numeric</code>  </td>
+</tr>
+<tr>
+ <td align="left">
+ integer(vector)   </td><td align="left">  <code>integer</code>  </td>
+</tr>
+<tr>
+ <td align="left">
+ discrete(vector)  </td><td align="left">  <code>factor</code> (names of values = levels) </td>
+</tr>
+<tr>
+ <td align="left">
+ logical(vector)   </td><td align="left">  <code>logical</code>
+</td>
+</tr>
+
+</table>
+
+<p>Dependent parameters whose requirements are not satisfied are represented by a scalar
+NA in the output.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-  dfRowsToList(df, par.set)
+dfRowsToList(df, par.set)
 
-  dfRowToList(df, par.set, i)
+dfRowToList(df, par.set, i)
 </pre>
 
 
@@ -34,18 +55,19 @@ scalar NA in the output.
 <table summary="R argblock">
 <tr valign="top"><td><code>df</code></td>
 <td>
-<p>[<code>data.frame</code>]<br> Data.frame, potentially
-from <code><a href="OptPath.html">OptPathDF</a></code>.  Columns are assumed to be
-in the same order as par.set.</p>
+<p>[<code>data.frame</code>]<br>
+Data.frame, potentially from <code><a href="OptPath.html">OptPathDF</a></code>.
+Columns are assumed to be in the same order as par.set.</p>
 </td></tr>
 <tr valign="top"><td><code>par.set</code></td>
 <td>
-<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter
-set.</p>
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br>
+Parameter set.</p>
 </td></tr>
 <tr valign="top"><td><code>i</code></td>
 <td>
-<p>[<code>integer(1)</code>]<br> Row index.</p>
+<p>[<code>integer(1)</code>]<br>
+Row index.</p>
 </td></tr>
 </table>
 

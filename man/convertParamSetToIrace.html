@@ -10,16 +10,14 @@
 
 <h3>Description</h3>
 
-<p>Converts to a textual description used in irace and then
-potentially calls <a href="../../irace/html/readParameters.html">readParameters</a>.
+<p>Converts to a textual description used in irace and then potentially calls <a href="../../irace/html/readParameters.html">readParameters</a>.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-  convertParamSetToIrace(par.set, digits = 4,
-    as.chars = FALSE)
+convertParamSetToIrace(par.set, digits = 4, as.chars = FALSE)
 </pre>
 
 
@@ -28,19 +26,19 @@ potentially calls <a href="../../irace/html/readParameters.html">readParameters<
 <table summary="R argblock">
 <tr valign="top"><td><code>par.set</code></td>
 <td>
-<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter
-set.</p>
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br>
+Parameter set.</p>
 </td></tr>
 <tr valign="top"><td><code>digits</code></td>
 <td>
-<p>[<code>integer(1)</code>]<br> Number of digits
-used in transformation to irace textual description,
+<p>[<code>integer(1)</code>]<br>
+Number of digits used in transformation to irace textual description,
 code<a href="../../base/html/formatc.html">formatC</a> is used here internally.</p>
 </td></tr>
 <tr valign="top"><td><code>as.chars</code></td>
 <td>
-<p>[<code>logical(1)</code>]<br> Return results as
-character vector of lines <code>FALSE</code> or call
+<p>[<code>logical(1)</code>]<br>
+Return results as character vector of lines <code>FALSE</code> or call
 <code><a href="../../irace/html/readParameters.html">readParameters</a></code> on it (<code>TRUE</code>).
 Default is <code>FALSE</code>.</p>
 </td></tr>

@@ -12,16 +12,46 @@
 
 <p>Optimizers can iteratively log their evaluated points
 into this object. Can be converted into a data.frame with
-<code>as.data.frame(x, discrete.as.factor = TRUE /
-  FALSE)</code>.
+<code>as.data.frame(x, discretes.as.factor = TRUE / FALSE)</code>.
 </p>
+<p>A optimization path has a number of path elements, where each element consists of: the value of the
+decision variables at this point, the values of the performance measures at this point,
+the date-of-birth (dob) of this point, the end-of-life (eol) of this point and possibly
+an error message. See also <code><a href="addOptPathEl.html">addOptPathEl</a></code>.
+</p>
+<p>For discrete parameters always the name of the value is stored as a character.
+When you retrieve an element with <code><a href="getOptPathEl.html">getOptPathEl</a></code>, this name is converted to
+the actual discrete value.
+</p>
+<p>If parameters have associated transformation you are free to decide whether you want to
+add x values before or after transformation, see argument <code>add.transformed.x</code> and
+<code><a href="trafoOptPath.html">trafoOptPath</a></code>.
+</p>
+<p>The S3 class is a list which stores at least these elements:
+</p>
+
+<dl>
+<dt>par.set [<code><a href="makeParamSet.html">ParamSet</a></code>]</dt><dd><p>See argument of same name.</p>
+</dd>
+<dt>y.names [<code>character</code>]</dt><dd><p>See argument of same name.</p>
+</dd>
+<dt>minimize [<code>logical</code>]</dt><dd><p>See argument of same name.</p>
+</dd>
+<dt>add.transformed.x [<code>logical(1)</code>]</dt><dd><p>See argument of same name.</p>
+</dd>
+<dt>env [<code>environment</code>]</dt><dd><p>Environment which stores the optimization path.
+Contents depend on implementation.</p>
+</dd>
+</dl>
+
 
 
 <h3>Usage</h3>
 
 <pre>
-  makeOptPathDF(par.set, y.names, minimize,
-    add.transformed.x = FALSE)
+makeOptPathDF(par.set, y.names, minimize, add.transformed.x = FALSE,
+  include.error.message = FALSE, include.exec.time = FALSE,
+  include.extra = FALSE)
 </pre>
 
 
@@ -30,73 +60,66 @@ into this object. Can be converted into a data.frame with
 <table summary="R argblock">
 <tr valign="top"><td><code>par.set</code></td>
 <td>
-<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter set
-for the decision variables that are optimized.</p>
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br>
+Parameter set.</p>
 </td></tr>
 <tr valign="top"><td><code>y.names</code></td>
 <td>
-<p>[<code>character</code>]<br> Names of performance
-measures that are optimized or logged.</p>
+<p>[<code>character</code>]<br>
+Names of performance measures that are optimized or logged.</p>
 </td></tr>
 <tr valign="top"><td><code>minimize</code></td>
 <td>
-<p>[<code>logical</code>]<br> Which of the
-performance measures in y.names should be minimized?
+<p>[<code>logical</code>]<br>
+Which of the performance measures in y.names should be minimized?
 Vector of booleans in the same order as <code>y.names</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>add.transformed.x</code></td>
 <td>
-<p>[<code>logical(1)</code>]<br> If some
-parameters have associated transformations, are you going
-to add x values after they have been transformed?
+<p>[<code>logical(1)</code>]<br>
+If some parameters have associated transformations, are you going to
+add x values after they have been transformed?
+Default is <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>include.error.message</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br>
+Should it be possible to include an error message string (or NA if no error occurred)
+into the path for each evaluation?
+This is useful if you have complex, long running objective evaluations that might fail.
+Default is <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>include.exec.time</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br>
+Should it be possible to include execution time of evaluations
+into the path for each evaluation?
+Note that execution time could also be entered in <code>y.names</code> as a direct
+performance measure. If you use this option here, time is regarded as an extra measurement
+you might be curious about.
+Default is <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>include.extra</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br>
+Should it be possible to include extra info
+into the path for each evaluation?
 Default is <code>FALSE</code>.</p>
 </td></tr>
 </table>
 
 
-<h3>Details</h3>
-
-<p>A optimization path has a number of path elements, where
-each element consists of: the value of the decision
-variables at this point, the values of the performance
-measures at this point, the date-of-birth (dob) of this
-point and the end-of-life (eol) of this point.
-</p>
-<p>For discrete parameters always the name of the value is
-stored as a character. When you retrieve an element with
-<code><a href="getOptPathEl.html">getOptPathEl</a></code>, this name is converted to the
-actual discrete value.
-</p>
-<p>If parameters have associated transformation you are free
-to decide whether you want to add x values before or
-after transformation, see argument
-<code>add.transformed.x</code> and <code><a href="trafoOptPath.html">trafoOptPath</a></code>.
-</p>
-<p>The S3 class is a list which stores at least these
-elements: </p>
- <dl>
-<dt>par.set
-[<code><a href="makeParamSet.html">ParamSet</a></code>]</dt><dd><p>See argument of same name.</p>
-</dd>
-<dt>y.names [<code>character</code>]</dt><dd><p>See argument of same
-name.</p>
-</dd> <dt>minimize [<code>logical</code>]</dt><dd><p>See argument of
-same name.</p>
-</dd> <dt>add.transformed.x
-[<code>logical(1)</code>]</dt><dd><p>See argument of same name.</p>
-</dd>
-<dt>env [<code>environment</code>]</dt><dd><p>Environment which stores
-the optimization path. Contents depend on
-implementation.</p>
-</dd> </dl>
-
-
-
 <h3>See Also</h3>
 
-<p><code><a href="getOptPathLength.html">getOptPathLength</a></code>,
-<code><a href="getOptPathEl.html">getOptPathEl</a></code>, <code><a href="addOptPathEl.html">addOptPathEl</a></code>,
-<code><a href="getOptPathY.html">getOptPathY</a></code>, <code><a href="setOptPathElDOB.html">setOptPathElDOB</a></code>,
+<p>Other optpath: <code><a href="addOptPathEl.html">addOptPathEl</a></code>;
+<code><a href="getOptPathBestIndex.html">getOptPathBestIndex</a></code>;
+<code><a href="getOptPathCol.html">getOptPathCol</a></code>; <code><a href="getOptPathDOB.html">getOptPathDOB</a></code>;
+<code><a href="getOptPathEOL.html">getOptPathEOL</a></code>; <code><a href="getOptPathEl.html">getOptPathEl</a></code>;
+<code><a href="getOptPathErrorMessages.html">getOptPathErrorMessages</a></code>;
+<code><a href="getOptPathExecTimes.html">getOptPathExecTimes</a></code>;
+<code><a href="getOptPathLength.html">getOptPathLength</a></code>;
+<code><a href="getOptPathParetoFront.html">getOptPathParetoFront</a></code>;
+<code><a href="getOptPathY.html">getOptPathY</a></code>; <code><a href="setOptPathElDOB.html">setOptPathElDOB</a></code>;
 <code><a href="setOptPathElEOL.html">setOptPathElEOL</a></code>
 </p>
 

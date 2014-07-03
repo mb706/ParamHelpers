@@ -15,20 +15,20 @@
 
 <h3>Description</h3>
 
-<p>Changes the argument in-place. Note that when adding
-parameters that have associated tranformations, it is
-probably best to add the untransformed values to the
-path. Otherwise you have to switch off the feasibility
-check, as constraints might now not hold anymore.
+<p>Changes the argument in-place.
+Note that when adding parameters that have associated tranformations, it is probably
+best to add the untransformed values to the path. Otherwise you have to switch off the
+feasibility check, as constraints might now not hold anymore.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-  addOptPathEl(op, x, y, dob = getOptPathLength(op) + 1L,
-    eol = as.integer(NA),
-    check.feasible = !op$add.transformed.x)
+addOptPathEl(op, x, y, dob = getOptPathLength(op) + 1L,
+  eol = as.integer(NA), error.message = NA_character_,
+  exec.time = NA_real_, extra = NULL,
+  check.feasible = !op$add.transformed.x)
 </pre>
 
 
@@ -37,33 +37,54 @@ check, as constraints might now not hold anymore.
 <table summary="R argblock">
 <tr valign="top"><td><code>op</code></td>
 <td>
-<p>[<code><a href="OptPath.html">OptPath</a></code>] <br> Optimization path.</p>
+<p>[<code><a href="OptPath.html">OptPath</a></code>]<br>
+Optimization path.</p>
 </td></tr>
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>[<code>list</code>]<br> List of parameter values for a
-point in input space. Must be in same order as
-parameters.</p>
+<p>[<code>list</code>]<br>
+List of parameter values for a point in input space. Must be in same order as parameters.</p>
 </td></tr>
 <tr valign="top"><td><code>y</code></td>
 <td>
-<p>[<code>numeric</code>]<br> Vector of fitness values.
-Must be in same order as <code>y.names</code>.</p>
+<p>[<code>numeric</code>]<br>
+Vector of fitness values.  Must be in same order as <code>y.names</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>dob</code></td>
 <td>
-<p>[<code>integer(1)</code>]<br> Date of birth of the
-new parameters.  Default is length of path + 1.</p>
+<p>[<code>integer(1)</code>]<br>
+Date of birth of the new parameters.
+Default is length of path + 1.</p>
 </td></tr>
 <tr valign="top"><td><code>eol</code></td>
 <td>
-<p>[<code>integer(1)</code>]<br> End of life of point.
+<p>[<code>integer(1)</code>]<br>
+End of life of point.
 Default is <code>NA</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>error.message</code></td>
+<td>
+<p>[<code>character(1)</code>]<br>
+Possible error message that occurred for this parameter values.
+Default is <code>NA</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>exec.time</code></td>
+<td>
+<p>[<code>numeric(1)</code>]<br>
+Possible exec time for this evaluation.
+Default is <code>NA</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>extra</code></td>
+<td>
+<p>[<code>list</code>]<br>
+Possible list of extra values to store.
+Must be in same order as in <code>extra.par.set</code> of <code><a href="OptPath.html">OptPath</a></code>.
+Default is <code>NULL</code></p>
 </td></tr>
 <tr valign="top"><td><code>check.feasible</code></td>
 <td>
-<p>[<code>logical(1)</code>]<br> Should
-<code>x</code> be checked with <code><a href="isFeasible.html">isFeasible</a></code>?
+<p>[<code>logical(1)</code>]<br>
+Should <code>x</code> be checked with <code><a href="isFeasible.html">isFeasible</a></code>?
 Default is <code>TRUE</code>.</p>
 </td></tr>
 </table>
@@ -71,8 +92,8 @@ Default is <code>TRUE</code>.</p>
 
 <h3>Details</h3>
 
-<p>Dependent parameters whose requirements are not satisfied
-must be represented by a scalar NA in the input.
+<p>Dependent parameters whose requirements are not satisfied must be represented by a scalar
+NA in the input.
 </p>
 
 
@@ -82,25 +103,37 @@ must be represented by a scalar NA in the input.
 </p>
 
 
+<h3>See Also</h3>
+
+<p>Other optpath: <code><a href="OptPath.html">OptPath</a></code>,
+<code><a href="OptPath.html">OptPathDF</a></code>, <code><a href="OptPath.html">makeOptPathDF</a></code>;
+<code><a href="getOptPathBestIndex.html">getOptPathBestIndex</a></code>;
+<code><a href="getOptPathCol.html">getOptPathCol</a></code>; <code><a href="getOptPathDOB.html">getOptPathDOB</a></code>;
+<code><a href="getOptPathEOL.html">getOptPathEOL</a></code>; <code><a href="getOptPathEl.html">getOptPathEl</a></code>;
+<code><a href="getOptPathErrorMessages.html">getOptPathErrorMessages</a></code>;
+<code><a href="getOptPathExecTimes.html">getOptPathExecTimes</a></code>;
+<code><a href="getOptPathLength.html">getOptPathLength</a></code>;
+<code><a href="getOptPathParetoFront.html">getOptPathParetoFront</a></code>;
+<code><a href="getOptPathY.html">getOptPathY</a></code>; <code><a href="setOptPathElDOB.html">setOptPathElDOB</a></code>;
+<code><a href="setOptPathElEOL.html">setOptPathElEOL</a></code>
+</p>
+
+
 <h3>Examples</h3>
 
-<pre><code class="r">
-ps &lt;- makeParamSet(
+<pre><code class="r">ps = makeParamSet(
   makeNumericParam(&quot;p1&quot;),
-  makeDiscreteParam(&quot;p2&quot;, values=c(&quot;a&quot;, &quot;b&quot;))
+  makeDiscreteParam(&quot;p2&quot;, values = c(&quot;a&quot;, &quot;b&quot;))
 )
-op &lt;- makeOptPathDF(par.set=ps, y.names=&quot;y&quot;, minimize=TRUE)
-addOptPathEl(op, x=list(p1=7, p2=&quot;b&quot;), y=1)
-addOptPathEl(op, x=list(p1=-1, p2=&quot;a&quot;), y=2)
+op = makeOptPathDF(par.set = ps, y.names = &quot;y&quot;, minimize = TRUE)
+addOptPathEl(op, x = list(p1 = 7, p2 = &quot;b&quot;), y = 1)
+addOptPathEl(op, x = list(p1 = -1, p2 = &quot;a&quot;), y = 2)
 as.data.frame(op)
 </code></pre>
 
 <pre><code>##   p1 p2 y dob eol
 ## 1  7  b 1   1  NA
 ## 2 -1  a 2   2  NA
-</code></pre>
-
-<pre><code class="r">
 </code></pre>
 
 

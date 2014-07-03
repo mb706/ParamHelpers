@@ -22,7 +22,7 @@
 <h3>Usage</h3>
 
 <pre>
-  filterParams(par.set, type)
+filterParams(par.set, type)
 </pre>
 
 
@@ -31,17 +31,15 @@
 <table summary="R argblock">
 <tr valign="top"><td><code>par.set</code></td>
 <td>
-<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter
-set.</p>
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br>
+Parameter set.</p>
 </td></tr>
 <tr valign="top"><td><code>type</code></td>
 <td>
-<p>[<code>character</code>]<br> Vector of allowed
-types, subset of: &ldquo;numeric&rdquo;, &ldquo;integer&rdquo;,
-&ldquo;numericvector&rdquo;, &ldquo;integervector&rdquo;,
-&ldquo;discrete&rdquo;, &ldquo;discretevector&rdquo;,
-&ldquo;logical&rdquo;, &ldquo;logicalvector&rdquo;,
-&ldquo;function&rdquo;, &ldquo;untyped&rdquo;.</p>
+<p>[<code>character</code>]<br>
+Vector of allowed types, subset of: &ldquo;numeric&rdquo;, &ldquo;integer&rdquo;, &ldquo;numericvector&rdquo;,
+&ldquo;integervector&rdquo;, &ldquo;discrete&rdquo;, &ldquo;discretevector&rdquo;, &ldquo;logical&rdquo;,
+&ldquo;logicalvector&rdquo;, &ldquo;function&rdquo;, &ldquo;untyped&rdquo;.</p>
 </td></tr>
 </table>
 
@@ -54,23 +52,32 @@ types, subset of: &ldquo;numeric&rdquo;, &ldquo;integer&rdquo;,
 
 <h3>Examples</h3>
 
-<pre><code class="r">
-
-ps <- makeParamSet(
-  makeNumericParam("u", lower=1),
-  makeIntegerParam("v", lower=1, upper=2),
-  makeDiscreteParam("w", values=1:2),
-  makeLogicalParam("x"),
-  makeNumericParam("y")
+<pre><code class="r">ps = makeParamSet(
+  makeNumericParam(&quot;u&quot;, lower = 1),
+  makeIntegerParam(&quot;v&quot;, lower = 1, upper = 2),
+  makeDiscreteParam(&quot;w&quot;, values = 1:2),
+  makeLogicalParam(&quot;x&quot;),
+  makeNumericParam(&quot;y&quot;)
 )
 # filter for numeric parameters
-filterParams(ps, "numeric")
-# filter for numeric and integer parameters
-filterParams(ps, c("integer","numeric"))
-
-
-
+filterParams(ps, &quot;numeric&quot;)
 </code></pre>
+
+<pre><code>##      Type len Def      Constr Req Trafo
+## u numeric   -   -    1 to Inf   -     -
+## y numeric   -   - -Inf to Inf   -     -
+</code></pre>
+
+<pre><code class="r"># filter for numeric and integer parameters
+filterParams(ps, c(&quot;integer&quot;,&quot;numeric&quot;))
+</code></pre>
+
+<pre><code>##      Type len Def      Constr Req Trafo
+## u numeric   -   -    1 to Inf   -     -
+## v integer   -   -      1 to 2   -     -
+## y numeric   -   - -Inf to Inf   -     -
+</code></pre>
+
 
 <hr><div align="center">[Package <em>ParamHelpers</em> version 1.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

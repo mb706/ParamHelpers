@@ -15,8 +15,7 @@
 
 <h3>Description</h3>
 
-<p>If the <code>name</code> is <code>NA</code>, indicating a missing
-parameter value due to unsatisfied requirements,
+<p>If the <code>name</code> is <code>NA</code>, indicating a missing parameter value due to unsatisfied requirements,
 <code>NA</code> is returned.
 </p>
 
@@ -24,7 +23,7 @@ parameter value due to unsatisfied requirements,
 <h3>Usage</h3>
 
 <pre>
-  discreteNameToValue(par, name)
+discreteNameToValue(par, name)
 </pre>
 
 
@@ -33,36 +32,32 @@ parameter value due to unsatisfied requirements,
 <table summary="R argblock">
 <tr valign="top"><td><code>par</code></td>
 <td>
-<p>[<code><a href="Param.html">Param</a></code>]<br> Discrete parameter or
-discrete vector.</p>
+<p>[<code><a href="Param.html">Param</a></code>]<br>
+Discrete parameter or discrete vector.</p>
 </td></tr>
 <tr valign="top"><td><code>name</code></td>
 <td>
-<p>[<code>character</code>]<br> Name (string) encoding
-the value for a discrete parameter, or a character vector
-of names for a discrete vector.</p>
+<p>[<code>character</code>]<br>
+Name (string) encoding the value for a discrete parameter,
+or a character vector of names for a discrete vector.</p>
 </td></tr>
 </table>
 
 
 <h3>Value</h3>
 
-<p>[any]. Parameter value for a discrete parameter or a list
-of values for a discrete vector.
+<p>[any]. Parameter value for a discrete parameter
+or a list of values for a discrete vector.
 </p>
 
 
 <h3>Examples</h3>
 
-<pre><code class="r">
-p &lt;- makeDiscreteParam(&quot;u&quot;, values=c(x1=&quot;a&quot;, x2=&quot;b&quot;, x3=&quot;b&quot;))
+<pre><code class="r">p = makeDiscreteParam(&quot;u&quot;, values=c(x1 = &quot;a&quot;, x2 = &quot;b&quot;, x3 = &quot;b&quot;))
 discreteNameToValue(p, &quot;x3&quot;)
 </code></pre>
 
 <pre><code>## [1] &quot;b&quot;
-</code></pre>
-
-<pre><code class="r">
 </code></pre>
 
 

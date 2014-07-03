@@ -34,38 +34,86 @@ machine learning.
 <td>Convert encoding name(s) to discrete value(s).</td></tr>
 <tr><td width="25%"><a href="discreteValueToName.html">discreteValueToName</a></td>
 <td>Convert discrete value(s) to encoding name(s).</td></tr>
+<tr><td width="25%"><a href="extractParamSetFromSooFunction.html">extractParamSetFromSooFunction</a></td>
+<td>Extracts ParamSet from soobench function.</td></tr>
 <tr><td width="25%"><a href="filterParams.html">filterParams</a></td>
 <td>Get parameter subset of only certain parameters.</td></tr>
 <tr><td width="25%"><a href="generateDesign.html">generateDesign</a></td>
 <td>Generates a statistical design for a parameter set.</td></tr>
+<tr><td width="25%"><a href="generateGridDesign.html">generateGridDesign</a></td>
+<td>Generates a grid design for a parameter set.</td></tr>
+<tr><td width="25%"><a href="getDefaults.html">getDefaults</a></td>
+<td>Return defaults of parameters in parameter set.</td></tr>
 <tr><td width="25%"><a href="getLower.html">getLower</a></td>
 <td>Get lower / upper bounds and allowed discrete values for parameters.</td></tr>
 <tr><td width="25%"><a href="getOptPathBestIndex.html">getOptPathBestIndex</a></td>
 <td>Get index of the best element from optimization path.</td></tr>
+<tr><td width="25%"><a href="getOptPathCol.html">getOptPathCol</a></td>
+<td>Get column from the optimization path.</td></tr>
 <tr><td width="25%"><a href="getOptPathDOB.html">getOptPathDOB</a></td>
 <td>Get date-of-birth vector from the optimization path.</td></tr>
 <tr><td width="25%"><a href="getOptPathEl.html">getOptPathEl</a></td>
 <td>Get an element from the optimization path.</td></tr>
 <tr><td width="25%"><a href="getOptPathEOL.html">getOptPathEOL</a></td>
 <td>Get end-of-life vector from the optimization path.</td></tr>
+<tr><td width="25%"><a href="getOptPathErrorMessages.html">getOptPathErrorMessages</a></td>
+<td>Get error-message vector from the optimization path.</td></tr>
+<tr><td width="25%"><a href="getOptPathExecTimes.html">getOptPathExecTimes</a></td>
+<td>Get exec-time vector from the optimization path.</td></tr>
 <tr><td width="25%"><a href="getOptPathLength.html">getOptPathLength</a></td>
 <td>Get the length of the optimization path.</td></tr>
+<tr><td width="25%"><a href="getOptPathParetoFront.html">getOptPathParetoFront</a></td>
+<td>Get indices of pareto front of optimization path.</td></tr>
 <tr><td width="25%"><a href="getOptPathY.html">getOptPathY</a></td>
-<td>Get y vector from the optimization path.</td></tr>
+<td>Get y-vector or y-matrix from the optimization path.</td></tr>
 <tr><td width="25%"><a href="getParamIds.html">getParamIds</a></td>
 <td>Return ids of parameters in parameter set.</td></tr>
 <tr><td width="25%"><a href="getParamLengths.html">getParamLengths</a></td>
 <td>Return lengths of parameters in parameter set.</td></tr>
-<tr><td width="25%"><a href="getTypes.html">getTypes</a></td>
+<tr><td width="25%"><a href="getParamNr.html">getParamNr</a></td>
+<td>Return number of parameters in set.</td></tr>
+<tr><td width="25%"><a href="getParamTypeCounts.html">getParamTypeCounts</a></td>
+<td>Returns information on the number of parameters of a each type.</td></tr>
+<tr><td width="25%"><a href="getParamTypes.html">getParamTypes</a></td>
 <td>Returns type information for a parameter set.</td></tr>
 <tr><td width="25%"><a href="getLower.html">getUpper</a></td>
 <td>Get lower / upper bounds and allowed discrete values for parameters.</td></tr>
 <tr><td width="25%"><a href="getLower.html">getValues</a></td>
 <td>Get lower / upper bounds and allowed discrete values for parameters.</td></tr>
+<tr><td width="25%"><a href="hasType.html">hasDiscrete</a></td>
+<td>Check whether parameter set contains a certain type.</td></tr>
+<tr><td width="25%"><a href="hasFiniteBoxConstraints.html">hasFiniteBoxConstraints</a></td>
+<td>Checks if a parameter or each parameter of a parameter set has ONLY finite lower and upper bounds.</td></tr>
+<tr><td width="25%"><a href="hasForbidden.html">hasForbidden</a></td>
+<td>Check parameter set for forbidden region.</td></tr>
+<tr><td width="25%"><a href="hasType.html">hasInteger</a></td>
+<td>Check whether parameter set contains a certain type.</td></tr>
+<tr><td width="25%"><a href="hasType.html">hasLogical</a></td>
+<td>Check whether parameter set contains a certain type.</td></tr>
+<tr><td width="25%"><a href="hasType.html">hasNumeric</a></td>
+<td>Check whether parameter set contains a certain type.</td></tr>
 <tr><td width="25%"><a href="hasRequires.html">hasRequires</a></td>
 <td>Check parameter / parameter set for requirements / dependencies.</td></tr>
+<tr><td width="25%"><a href="hasTrafo.html">hasTrafo</a></td>
+<td>Check parameter / parameter set for trafos.</td></tr>
+<tr><td width="25%"><a href="hasType.html">hasType</a></td>
+<td>Check whether parameter set contains a certain type.</td></tr>
+<tr><td width="25%"><a href="isType.html">isDiscrete</a></td>
+<td>Check parameter / parameter set contain ONLY a certain type.</td></tr>
+<tr><td width="25%"><a href="isEmpty.html">isEmpty</a></td>
+<td>Check whether parameter set is empty.</td></tr>
 <tr><td width="25%"><a href="isFeasible.html">isFeasible</a></td>
 <td>Check if parameter value is valid.</td></tr>
+<tr><td width="25%"><a href="isForbidden.html">isForbidden</a></td>
+<td>Check whether parameter setting lies in forbidden region of parameter set.</td></tr>
+<tr><td width="25%"><a href="isType.html">isInteger</a></td>
+<td>Check parameter / parameter set contain ONLY a certain type.</td></tr>
+<tr><td width="25%"><a href="isType.html">isLogical</a></td>
+<td>Check parameter / parameter set contain ONLY a certain type.</td></tr>
+<tr><td width="25%"><a href="isType.html">isNumeric</a></td>
+<td>Check parameter / parameter set contain ONLY a certain type.</td></tr>
+<tr><td width="25%"><a href="isType.html">isType</a></td>
+<td>Check parameter / parameter set contain ONLY a certain type.</td></tr>
 <tr><td width="25%"><a href="LearnerParam.html">LearnerParam</a></td>
 <td>Create a description object for a parameter of a machine learning algorithm.</td></tr>
 <tr><td width="25%"><a href="LearnerParam.html">makeDiscreteLearnerParam</a></td>
@@ -127,9 +175,9 @@ machine learning.
 <tr><td width="25%"><a href="removeMissingValues.html">removeMissingValues</a></td>
 <td>Removes all scalar NAs from a parameter setting list.</td></tr>
 <tr><td width="25%"><a href="sampleValue.html">sampleValue</a></td>
-<td>Sample a random value from a parameter or a parameter set uniformly.</td></tr>
+<td>Dependent parameters whose requirements are not satisfied are represented by a scalar NA in the output.</td></tr>
 <tr><td width="25%"><a href="sampleValues.html">sampleValues</a></td>
-<td>Sample n random values from a parameter or a parameter set uniformly.</td></tr>
+<td>Dependent parameters whose requirements are not satisfied are represented by a scalar NA in the output.</td></tr>
 <tr><td width="25%"><a href="setOptPathElDOB.html">setOptPathElDOB</a></td>
 <td>Set the dates of birth of parameter values, in-place.</td></tr>
 <tr><td width="25%"><a href="setOptPathElEOL.html">setOptPathElEOL</a></td>

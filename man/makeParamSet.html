@@ -17,18 +17,22 @@
 
 <p><code>makeParamSet</code>: Contruct from a bunch of parameters.
 </p>
-<p><code>makeNumericParamSet</code>: Convenience function for
-numerics.
+<p>Multiple sets can be concatenated with <code>c</code>.
+</p>
+<p>The constructed S3 class is simply a list that contains the element <code>pars</code>.
+<code>pars</code> is a list of the passed parameters, named by their ids.
+</p>
+<p><code>makeNumericParamSet</code>: Convenience function for numerics.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-  makeParamSet(..., params)
+makeParamSet(..., params, forbidden = NULL)
 
-  makeNumericParamSet(id = "x", len, lower = -Inf,
-    upper = Inf, vector = TRUE)
+makeNumericParamSet(id = "x", len, lower = -Inf, upper = Inf,
+  vector = TRUE)
 </pre>
 
 
@@ -37,48 +41,56 @@ numerics.
 <table summary="R argblock">
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>[<code><a href="Param.html">Param</a></code>]<br> Parameters.</p>
+<p>[<code><a href="Param.html">Param</a></code>]<br>
+Parameters.</p>
 </td></tr>
 <tr valign="top"><td><code>params</code></td>
 <td>
-<p>[list of <code><a href="Param.html">Param</a></code>]<br> List of
-parameters, alternative way instead of using <code>...</code>.</p>
+<p>[list of <code><a href="Param.html">Param</a></code>]<br>
+List of parameters, alternative way instead of using <code>...</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>forbidden</code></td>
+<td>
+<p>[<code>NULL</code> | R expression]<br>
+States forbidden region of parameter set via an expression.
+Every setting which satisfies this expression is considered to be infeasible.
+This makes it possible to exclude more complex region of the parameter space
+than through simple constraints or <code>requires</code>-conditions
+(although these should be always used when possible).
+If parameters have associated trafos, the forbidden region must always be specified on the original
+scale and not the transformed one.
+Default is <code>NULL</code> which means no forbidden region.</p>
 </td></tr>
 <tr valign="top"><td><code>id</code></td>
 <td>
-<p>[<code>character(1)</code>] Name of parameter.</p>
+<p>[<code>character(1)</code>]
+Name of parameter.</p>
 </td></tr>
 <tr valign="top"><td><code>len</code></td>
 <td>
-<p>[<code>integer(1)</code>]<br> Length of vector.</p>
+<p>[<code>integer(1)</code>]<br>
+Length of vector.</p>
 </td></tr>
 <tr valign="top"><td><code>lower</code></td>
 <td>
-<p>[<code>numeric</code>]<br> Lower bound.  Default is
-<code>-Inf</code>.</p>
+<p>[<code>numeric</code>]<br>
+Lower bound.
+Default is <code>-Inf</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>upper</code></td>
 <td>
-<p>[<code>numeric</code>] <br> Upper bound.  Default
-is <code>Inf</code>.</p>
+<p>[<code>numeric</code>] <br>
+Upper bound.
+Default is <code>Inf</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>vector</code></td>
 <td>
-<p>[<code>logical(1)</code>] <br> Should a
-<code>NumericVectorParam</code> be used instead of n
-<code>NumericParam</code> objects?  Default is <code>TRUE</code>.</p>
+<p>[<code>logical(1)</code>] <br>
+Should a <code>NumericVectorParam</code> be used instead of
+n <code>NumericParam</code> objects?
+Default is <code>TRUE</code>.</p>
 </td></tr>
 </table>
-
-
-<h3>Details</h3>
-
-<p>Multiple sets can be concatenated with <code>c</code>.
-</p>
-<p>The constructed S3 class is simply a list that contains
-the element <code>pars</code>. <code>pars</code> is a list of the
-passed parameters, named by their ids.
-</p>
 
 
 <h3>Value</h3>
@@ -89,19 +101,26 @@ passed parameters, named by their ids.
 
 <h3>Examples</h3>
 
-<pre><code class="r">
-
-makeParamSet(
-  makeNumericParam("u", lower=1),
-  makeIntegerParam("v", lower=1, upper=2),
-  makeDiscreteParam("w", values=1:2),
-  makeLogicalParam("x"),
-  makeDiscreteVectorParam("y", len=2, values=c("a", "b"))
+<pre><code class="r">makeParamSet(
+  makeNumericParam(&quot;u&quot;, lower=1),
+  makeIntegerParam(&quot;v&quot;, lower=1, upper=2),
+  makeDiscreteParam(&quot;w&quot;, values=1:2),
+  makeLogicalParam(&quot;x&quot;),
+  makeDiscreteVectorParam(&quot;y&quot;, len=2, values=c(&quot;a&quot;, &quot;b&quot;))
 )
-
-
-
 </code></pre>
+
+<pre><code>## Warning: invalid factor level, NA generated
+</code></pre>
+
+<pre><code>##             Type  len Def   Constr Req Trafo
+## u        numeric    -   - 1 to Inf   -     -
+## v        integer    -   -   1 to 2   -     -
+## w       discrete    -   -      1,2   -     -
+## x        logical    -   -        -   -     -
+## y discretevector &lt;NA&gt;   -      a,b   -     -
+</code></pre>
+
 
 <hr><div align="center">[Package <em>ParamHelpers</em> version 1.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -22,8 +22,8 @@
 <h3>Usage</h3>
 
 <pre>
-  getOptPathBestIndex(op, y.name = op$y.names[1],
-    dob = op$env$dob, eol = op$env$eol, ties = "last")
+getOptPathBestIndex(op, y.name = op$y.names[1], dob = op$env$dob,
+  eol = op$env$eol, ties = "last")
 </pre>
 
 
@@ -32,52 +32,69 @@
 <table summary="R argblock">
 <tr valign="top"><td><code>op</code></td>
 <td>
-<p>[<code><a href="OptPath.html">OptPath</a></code>]<br> Optimization path.</p>
+<p>[<code><a href="OptPath.html">OptPath</a></code>]<br>
+Optimization path.</p>
 </td></tr>
 <tr valign="top"><td><code>y.name</code></td>
 <td>
-<p>[<code>character(1)</code>]<br> Name of target
-value to decide which element is best.  Default is
-<code>y.names[1]</code>.</p>
+<p>[<code>character(1)</code>]<br>
+Name of target value to decide which element is best.
+Default is <code>y.names[1]</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>dob</code></td>
 <td>
-<p>[<code>integer</code>]<br> Possible dates of birth to
-select best element from. Defaults to all.</p>
+<p>[<code>integer</code>]<br>
+Possible dates of birth to select best element from. Defaults to all.</p>
 </td></tr>
 <tr valign="top"><td><code>eol</code></td>
 <td>
-<p>[<code>integer</code>]<br> Possible end of life to
-select best element from. Defaults to all.</p>
+<p>[<code>integer</code>]<br>
+Possible end of life to select best element from. Defaults to all.</p>
 </td></tr>
 <tr valign="top"><td><code>ties</code></td>
 <td>
-<p>[<code>character(1)</code>]<br> How should ties be
-broken when more than one optimal element is found?
-&ldquo;all&rdquo;: return all indices, &ldquo;first&rdquo;: return
-first optimal element in path, &ldquo;last&rdquo;: return last
-optimal element in path, &ldquo;random&rdquo;: return random
-optimal element in path.  Default is &ldquo;last&rdquo;.</p>
+<p>[<code>character(1)</code>]<br>
+How should ties be broken when more than one optimal element is found?
+&ldquo;all&rdquo;: return all indices,
+&ldquo;first&rdquo;: return first optimal element in path,
+&ldquo;last&rdquo;: return last optimal element in path,
+&ldquo;random&rdquo;: return random optimal element in path.
+Default is &ldquo;last&rdquo;.</p>
 </td></tr>
 </table>
 
 
 <h3>Value</h3>
 
-<p>[<code>integer</code>] Index or indices into path. See
-<code>ties</code>.
+<p>[<code>integer</code>]
+Index or indices into path. See <code>ties</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other optpath: <code><a href="OptPath.html">OptPath</a></code>,
+<code><a href="OptPath.html">OptPathDF</a></code>, <code><a href="OptPath.html">makeOptPathDF</a></code>;
+<code><a href="addOptPathEl.html">addOptPathEl</a></code>; <code><a href="getOptPathCol.html">getOptPathCol</a></code>;
+<code><a href="getOptPathDOB.html">getOptPathDOB</a></code>; <code><a href="getOptPathEOL.html">getOptPathEOL</a></code>;
+<code><a href="getOptPathEl.html">getOptPathEl</a></code>;
+<code><a href="getOptPathErrorMessages.html">getOptPathErrorMessages</a></code>;
+<code><a href="getOptPathExecTimes.html">getOptPathExecTimes</a></code>;
+<code><a href="getOptPathLength.html">getOptPathLength</a></code>;
+<code><a href="getOptPathParetoFront.html">getOptPathParetoFront</a></code>;
+<code><a href="getOptPathY.html">getOptPathY</a></code>; <code><a href="setOptPathElDOB.html">setOptPathElDOB</a></code>;
+<code><a href="setOptPathElEOL.html">setOptPathElEOL</a></code>
 </p>
 
 
 <h3>Examples</h3>
 
-<pre><code class="r">
-ps &lt;- makeParamSet(makeNumericParam(&quot;x&quot;))
-op &lt;- makeOptPathDF(par.set=ps, y.names=&quot;y&quot;, minimize=TRUE)
-addOptPathEl(op, x=list(x=1), y=5)
-addOptPathEl(op, x=list(x=2), y=3)
-addOptPathEl(op, x=list(x=3), y=9)
-addOptPathEl(op, x=list(x=4), y=3)
+<pre><code class="r">ps = makeParamSet(makeNumericParam(&quot;x&quot;))
+op = makeOptPathDF(par.set = ps, y.names = &quot;y&quot;, minimize = TRUE)
+addOptPathEl(op, x = list(x = 1), y = 5)
+addOptPathEl(op, x = list(x = 2), y = 3)
+addOptPathEl(op, x = list(x = 3), y = 9)
+addOptPathEl(op, x = list(x = 4), y = 3)
 as.data.frame(op)
 </code></pre>
 
@@ -94,13 +111,10 @@ as.data.frame(op)
 <pre><code>## [1] 4
 </code></pre>
 
-<pre><code class="r">getOptPathBestIndex(op, ties=&quot;first&quot;)
+<pre><code class="r">getOptPathBestIndex(op, ties = &quot;first&quot;)
 </code></pre>
 
 <pre><code>## [1] 2
-</code></pre>
-
-<pre><code class="r">
 </code></pre>
 
 

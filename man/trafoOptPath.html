@@ -15,16 +15,15 @@
 
 <h3>Description</h3>
 
-<p>Transform optimization path with associated
-transformation functions of parameters. Can only be done
-when x values where added &ldquo;untransformed&rdquo;.
+<p>Transform optimization path with associated transformation functions of parameters.
+Can only be done when x values where added &ldquo;untransformed&rdquo;.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-  trafoOptPath(opt.path)
+trafoOptPath(opt.path)
 </pre>
 
 
@@ -33,8 +32,8 @@ when x values where added &ldquo;untransformed&rdquo;.
 <table summary="R argblock">
 <tr valign="top"><td><code>opt.path</code></td>
 <td>
-<p>[<code><a href="OptPath.html">OptPath</a></code>]<br> Optimization
-path.</p>
+<p>[<code><a href="OptPath.html">OptPath</a></code>]<br>
+Optimization path.</p>
 </td></tr>
 </table>
 
@@ -47,13 +46,12 @@ path.</p>
 
 <h3>Examples</h3>
 
-<pre><code class="r">
-ps &lt;- makeParamSet(
+<pre><code class="r">ps = makeParamSet(
   makeIntegerParam(&quot;u&quot;, trafo=function(x) 2*x),
   makeNumericVectorParam(&quot;v&quot;, len=2, trafo=function(x) x/sum(x)),
   makeDiscreteParam(&quot;w&quot;, values=c(&quot;a&quot;, &quot;b&quot;))
 )
-op &lt;- makeOptPathDF(ps, y.names=&quot;y&quot;, minimize=TRUE)
+op = makeOptPathDF(ps, y.names=&quot;y&quot;, minimize=TRUE)
 addOptPathEl(op, x=list(3, c(2, 4), &quot;a&quot;), y=0, dob=1, eol=1)
 addOptPathEl(op, x=list(4, c(5, 3), &quot;b&quot;), y=2, dob=5, eol=7)
 
@@ -65,16 +63,13 @@ as.data.frame(op)
 ## 2 4  5  3 b 2   5   7
 </code></pre>
 
-<pre><code class="r">op &lt;- trafoOptPath(op)
+<pre><code class="r">op = trafoOptPath(op)
 as.data.frame(op)
 </code></pre>
 
 <pre><code>##   u     v1     v2 w y dob eol
 ## 1 6 0.3333 0.6667 a 0   1   1
 ## 2 8 0.6250 0.3750 b 2   5   7
-</code></pre>
-
-<pre><code class="r">
 </code></pre>
 
 

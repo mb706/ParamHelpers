@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Generates a grid design for a parameter set.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+<script src="http://yandex.st/highlightjs/7.3/languages/r.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for generateGridDesign {ParamHelpers}"><tr><td>generateGridDesign {ParamHelpers}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Generates a grid design for a parameter set.</h2>
+
+<h3>Description</h3>
+
+<p>The following types of columns are created:
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td align="left">
+ numeric(vector)   </td><td align="left">  <code>numeric</code>  </td>
+</tr>
+<tr>
+ <td align="left">
+ integer(vector)   </td><td align="left">  <code>integer</code>  </td>
+</tr>
+<tr>
+ <td align="left">
+ discrete(vector)  </td><td align="left">  <code>factor</code> (names of values = levels) </td>
+</tr>
+<tr>
+ <td align="left">
+ logical(vector)   </td><td align="left">  <code>logical</code>
+</td>
+</tr>
+
+</table>
+
+<p>If you want to convert these, look at <code><a href="../../BBmisc/html/convertDataFrameCols.html">convertDataFrameCols</a></code>.
+Dependent parameters whose constraints are unsatisfied generate <code>NA</code> entries in their
+respective columns.
+</p>
+<p>The algorithm currently performs these steps:
+</p>
+
+<ol>
+<li><p>We create a grid. For numerics and integers we use the specfied resolution.
+</p>
+</li>
+<li><p>Forbidden points are removed.
+</p>
+</li>
+<li><p>Parameters are trafoed (maybe); dependent parameters whose constraints are unsatisfied
+are set to <code>NA</code> entries.
+</p>
+</li>
+<li><p>Duplicated points are removed. Duplicated points are not generated in a
+grid design, but the way parameter dependencies are handled make this possible.
+</p>
+</li></ol>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+generateGridDesign(par.set, resolution, trafo = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>par.set</code></td>
+<td>
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br>
+Parameter set.</p>
+</td></tr>
+<tr valign="top"><td><code>resolution</code></td>
+<td>
+<p>[<code>integer</code>]<br>
+Resolution of the grid for each numeric/integer parameter in <code>par.set</code>.
+For vector parameters, it is the resolution per dimension.
+Either pass one resolution for all parameters, or a named vector.</p>
+</td></tr>
+<tr valign="top"><td><code>trafo</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br>
+Transform all parameters by using theirs respective transformation functions.
+Default is <code>FALSE</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>[<code>data.frame</code>]. Columns are named by the ids of the parameters.
+If the <code>par.set</code> argument contains a vector parameter, its corresponding column names
+in the design are the parameter id concatenated with 1 to dimension of the vector.
+The result will have an <code>logical(1)</code> attribute &ldquo;trafo&rdquo;,
+which is set to the value of argument <code>trafo</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">ps = makeParamSet(
+  makeNumericParam(&quot;x1&quot;, lower = -2, upper = 1),
+  makeNumericParam(&quot;x2&quot;, lower = -2, upper = 2, trafo = function(x) x^2)
+)
+generateGridDesign(ps, resolution = c(x1 = 4, x2 = 5), trafo = TRUE)
+</code></pre>
+
+<pre><code>##    x1 x2
+## 1  -2  4
+## 2  -1  4
+## 3   0  4
+## 4   1  4
+## 5  -2  1
+## 6  -1  1
+## 7   0  1
+## 8   1  1
+## 9  -2  0
+## 10 -1  0
+## 11  0  0
+## 12  1  0
+</code></pre>
+
+
+<hr><div align="center">[Package <em>ParamHelpers</em> version 1.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

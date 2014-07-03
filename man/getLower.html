@@ -15,21 +15,19 @@
 
 <h3>Description</h3>
 
-<p><code>getLower</code> and <code>getUpper</code> return a numerical
-vector of lower and upper bounds, <code>getValues</code>
-returns a list of possible value sets for discrete
-parameters.
+<p><code>getLower</code> and <code>getUpper</code> return a numerical vector of lower and upper
+bounds, <code>getValues</code> returns a list of possible value sets for discrete parameters.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-  getLower(par.set, with.nr = FALSE)
+getLower(par.set, with.nr = FALSE)
 
-  getUpper(par.set, with.nr = FALSE)
+getUpper(par.set, with.nr = FALSE)
 
-  getValues(par.set)
+getValues(par.set)
 </pre>
 
 
@@ -38,13 +36,13 @@ parameters.
 <table summary="R argblock">
 <tr valign="top"><td><code>par.set</code></td>
 <td>
-<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter
-set.</p>
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br>
+Parameter set.</p>
 </td></tr>
 <tr valign="top"><td><code>with.nr</code></td>
 <td>
-<p>[<code>logical(1)</code>]<br> Should number from
-1 to length be appended to names of vector params?
+<p>[<code>logical(1)</code>]<br>
+Should number from 1 to length be appended to names of vector params?
 Default is <code>FALSE</code>.</p>
 </td></tr>
 </table>
@@ -52,8 +50,7 @@ Default is <code>FALSE</code>.</p>
 
 <h3>Details</h3>
 
-<p>Parameters for which such bound make no sense - due to
-their type - are not present in the result.
+<p>Parameters for which such bound make no sense - due to their type - are not present in the result.
 </p>
 
 
@@ -65,12 +62,11 @@ their type - are not present in the result.
 
 <h3>Examples</h3>
 
-<pre><code class="r">
-ps &lt;- makeParamSet(
+<pre><code class="r">ps = makeParamSet(
   makeNumericParam(&quot;u&quot;),
-  makeIntegerParam(&quot;v&quot;, lower=1, upper=2),
-  makeDiscreteParam(&quot;w&quot;, values=1:2),
-  makeNumericVectorParam(&quot;x&quot;, len=2, lower=c(0, 10), upper=c(1, 11))
+  makeIntegerParam(&quot;v&quot;, lower = 1, upper = 2),
+  makeDiscreteParam(&quot;w&quot;, values = 1:2),
+  makeNumericVectorParam(&quot;x&quot;, len = 2, lower = c(0, 10), upper = c(1, 11))
 )
 getLower(ps)
 </code></pre>
@@ -86,11 +82,10 @@ getLower(ps)
 ## Inf   2   1  11
 </code></pre>
 
-<pre><code class="r">
-ps &lt;- makeParamSet(
+<pre><code class="r">ps = makeParamSet(
   makeNumericParam(&quot;u&quot;),
-  makeDiscreteParam(&quot;v&quot;, values=c(&quot;a&quot;, &quot;b&quot;)),
-  makeDiscreteParam(&quot;w&quot;, values=list(a=list(), b=NULL))
+  makeDiscreteParam(&quot;v&quot;, values = c(&quot;a&quot;, &quot;b&quot;)),
+  makeDiscreteParam(&quot;w&quot;, values = list(a = list(), b = NULL))
 )
 getValues(ps)
 </code></pre>
@@ -109,9 +104,6 @@ getValues(ps)
 ## 
 ## $w$b
 ## NULL
-</code></pre>
-
-<pre><code class="r">
 </code></pre>
 
 

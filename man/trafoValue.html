@@ -15,15 +15,14 @@
 
 <h3>Description</h3>
 
-<p>Transform a value with associated transformation
-function(s).
+<p>Transform a value with associated transformation function(s).
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-  trafoValue(par, x)
+trafoValue(par, x)
 </pre>
 
 
@@ -32,13 +31,14 @@ function(s).
 <table summary="R argblock">
 <tr valign="top"><td><code>par</code></td>
 <td>
-<p>[<code><a href="Param.html">Param</a></code> |
-<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter or parameter set.</p>
+<p>[<code><a href="Param.html">Param</a></code> | <code><a href="makeParamSet.html">ParamSet</a></code>]<br>
+Parameter or parameter set.</p>
 </td></tr>
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>[any] <br> Single value to check.  For a
-parameter set this must be a list in the correct order.</p>
+<p>[any] <br>
+Single value to check.
+For a parameter set this must be a list in the correct order.</p>
 </td></tr>
 </table>
 
@@ -51,9 +51,8 @@ parameter set this must be a list in the correct order.</p>
 
 <h3>Examples</h3>
 
-<pre><code class="r">
-# transform simple parameter:
-p &lt;- makeNumericParam(id=&quot;x&quot;, trafo=function(x) x^2)
+<pre><code class="r"># transform simple parameter:
+p = makeNumericParam(id=&quot;x&quot;, trafo=function(x) x^2)
 trafoValue(p, 2)
 </code></pre>
 
@@ -61,7 +60,7 @@ trafoValue(p, 2)
 </code></pre>
 
 <pre><code class="r"># for a parameter set different transformation functions are possible:
-ps &lt;- makeParamSet(
+ps = makeParamSet(
   makeIntegerParam(&quot;u&quot;, trafo=function(x) 2*x),
   makeNumericVectorParam(&quot;v&quot;, len=2, trafo=function(x) x/sum(x)),
   makeDiscreteParam(&quot;w&quot;, values=c(&quot;a&quot;, &quot;b&quot;))
@@ -78,9 +77,6 @@ trafoValue(ps, list(3, c(2, 4), &quot;a&quot;))
 ## 
 ## $w
 ## [1] &quot;a&quot;
-</code></pre>
-
-<pre><code class="r">
 </code></pre>
 
 

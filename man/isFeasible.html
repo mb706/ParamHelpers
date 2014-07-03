@@ -15,12 +15,11 @@
 
 <h3>Description</h3>
 
-<p>Check if a parameter value satisfies the constraints of
-the parameter description. This includes the
-<code>requires</code> expressions, if <code>par</code> is a
-<code><a href="makeParamSet.html">ParamSet</a></code>. If <code>requires</code> is not
-satisfied, the parameter value must be set to scalar
-<code>NA</code> to be still feasible, a single scalar even in a
+<p>Check if a parameter value satisfies the constraints of the
+parameter description. This includes the <code>requires</code> expressions and
+the <code>forbidden</code> expression, if <code>par</code> is a <code><a href="makeParamSet.html">ParamSet</a></code>.
+If <code>requires</code> is not satisfied,
+the parameter value must be set to scalar <code>NA</code> to be still feasible, a single scalar even in a
 case of a vector parameter.
 </p>
 
@@ -28,7 +27,7 @@ case of a vector parameter.
 <h3>Usage</h3>
 
 <pre>
-  isFeasible(par, x)
+isFeasible(par, x)
 </pre>
 
 
@@ -37,13 +36,14 @@ case of a vector parameter.
 <table summary="R argblock">
 <tr valign="top"><td><code>par</code></td>
 <td>
-<p>[<code><a href="Param.html">Param</a></code> |
-<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter or parameter set.</p>
+<p>[<code><a href="Param.html">Param</a></code> | <code><a href="makeParamSet.html">ParamSet</a></code>]<br>
+Parameter or parameter set.</p>
 </td></tr>
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>[any] <br> Single value to check.  For a
-parameter set this must be a list in the correct order.</p>
+<p>[any] <br>
+Single value to check.
+For a parameter set this must be a list in the correct order.</p>
 </td></tr>
 </table>
 
@@ -56,44 +56,40 @@ parameter set this must be a list in the correct order.</p>
 
 <h3>Examples</h3>
 
-<pre><code class="r">
-p &lt;- makeNumericParam(&quot;x&quot;, lower=-1, upper=1)
-isFeasible(p,0) # True
+<pre><code class="r">p = makeNumericParam(&quot;x&quot;, lower = -1, upper = 1)
+isFeasible(p, 0) # True
 </code></pre>
 
 <pre><code>## [1] TRUE
 </code></pre>
 
-<pre><code class="r">isFeasible(p,2) # False, out of bounds
+<pre><code class="r">isFeasible(p, 2) # False, out of bounds
 </code></pre>
 
 <pre><code>## [1] FALSE
 </code></pre>
 
-<pre><code class="r">isFeasible(p,&quot;a&quot;) # False, wrong type
+<pre><code class="r">isFeasible(p, &quot;a&quot;) # False, wrong type
 </code></pre>
 
 <pre><code>## [1] FALSE
 </code></pre>
 
 <pre><code class="r"># now for parameter sets
-ps &lt;- makeParamSet(
-  makeNumericParam(&quot;x&quot;,lower=-1,upper=1),
-  makeDiscreteParam(&quot;y&quot;, values=c(&quot;a&quot;,&quot;b&quot;))
+ps = makeParamSet(
+  makeNumericParam(&quot;x&quot;, lower = -1, upper = 1),
+  makeDiscreteParam(&quot;y&quot;, values = c(&quot;a&quot;, &quot;b&quot;))
 )
-isFeasible(ps, list(0,&quot;a&quot;)) # True
+isFeasible(ps, list(0, &quot;a&quot;)) # True
 </code></pre>
 
 <pre><code>## [1] TRUE
 </code></pre>
 
-<pre><code class="r">isFeasible(ps, list(&quot;a&quot;,0)) # False, wrong order
+<pre><code class="r">isFeasible(ps, list(&quot;a&quot;, 0)) # False, wrong order
 </code></pre>
 
 <pre><code>## [1] FALSE
-</code></pre>
-
-<pre><code class="r">
 </code></pre>
 
 

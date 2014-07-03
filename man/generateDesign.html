@@ -15,16 +15,74 @@
 
 <h3>Description</h3>
 
+<p>The following types of columns are created:
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td align="left">
+ numeric(vector)   </td><td align="left">  <code>numeric</code>  </td>
+</tr>
+<tr>
+ <td align="left">
+ integer(vector)   </td><td align="left">  <code>integer</code>  </td>
+</tr>
+<tr>
+ <td align="left">
+ discrete(vector)  </td><td align="left">  <code>factor</code> (names of values = levels) </td>
+</tr>
+<tr>
+ <td align="left">
+ logical(vector)   </td><td align="left">  <code>logical</code>
+</td>
+</tr>
+
+</table>
+
+<p>If you want to convert these, look at <code><a href="../../BBmisc/html/convertDataFrameCols.html">convertDataFrameCols</a></code>.
+Dependent parameters whose constraints are unsatisfied generate <code>NA</code> entries in their
+respective columns.
+</p>
 <p>Currently only lhs designs are supported.
+</p>
+<p>The algorithm currently iterates the following steps:
+</p>
+
+<ol>
+<li><p>We create a space filling design for all parameters, disregarding <code>requires</code>,
+a <code>trafo</code> or the forbidden region.
+</p>
+</li>
+<li><p>Forbidden points are removed.
+</p>
+</li>
+<li><p>Parameters are trafoed (maybe); dependent parameters whose constraints are unsatisfied
+are set to <code>NA</code> entries.
+</p>
+</li>
+<li><p>Duplicated design points are removed. Duplicated points are not generated in a
+reasonable space-filling design, but the way discrete parameters and also parameter dependencies
+are handled make this possible.
+</p>
+</li>
+<li><p>If we removed some points, we now try to augment the design in a space-filling way
+and iterate.
+</p>
+</li></ol>
+
+<p>Note that augmenting currently is somewhat experimental as we simply generate missing points
+via new calls to <code><a href="../../lhs/html/randomLHS.html">randomLHS</a></code>, but do not add points so they are maximally
+far away from the already present ones. The reason is that the latter is quite hard to achieve
+with complicated dependences and forbidden regions, if one wants to ensure that points actually
+get added... But we are working on it,
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-  generateDesign(n = 10L, par.set, fun, fun.args = list(),
-    trafo = FALSE, ints.as.num = FALSE,
-    discretes.as.factor = TRUE, logicals.as.factor = FALSE)
+generateDesign(n = 10L, par.set, fun, fun.args = list(), trafo = FALSE,
+  augment = 20L)
 </pre>
 
 
@@ -33,86 +91,64 @@
 <table summary="R argblock">
 <tr valign="top"><td><code>n</code></td>
 <td>
-<p>[<code>integer(1)</code>]<br> Number of samples in
-design.  Default is 10.</p>
+<p>[<code>integer(1)</code>]<br>
+Number of samples in design.
+Default is 10.</p>
 </td></tr>
 <tr valign="top"><td><code>par.set</code></td>
 <td>
-<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter
-set.</p>
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br>
+Parameter set.</p>
 </td></tr>
 <tr valign="top"><td><code>fun</code></td>
 <td>
-<p>[<code>function</code>]<br> Function from package
-lhs.  Possible are: <code><a href="../../lhs/html/maximinLHS.html">maximinLHS</a></code>,
-<code><a href="../../lhs/html/randomLHS.html">randomLHS</a></code>,
-<code><a href="../../lhs/html/geneticLHS.html">geneticLHS</a></code>,
-<code><a href="../../lhs/html/improvedLHS.html">improvedLHS</a></code>,
-<code><a href="../../lhs/html/optAugmentLHS.html">optAugmentLHS</a></code>,
-<code><a href="../../lhs/html/optimumLHS.html">optimumLHS</a></code> Default is
-<code><a href="../../lhs/html/randomLHS.html">randomLHS</a></code>.</p>
+<p>[<code>function</code>]<br>
+Function from package lhs.
+Possible are: <code><a href="../../lhs/html/maximinLHS.html">maximinLHS</a></code>, <code><a href="../../lhs/html/randomLHS.html">randomLHS</a></code>,
+<code><a href="../../lhs/html/geneticLHS.html">geneticLHS</a></code>, <code><a href="../../lhs/html/improvedLHS.html">improvedLHS</a></code>, <code><a href="../../lhs/html/optAugmentLHS.html">optAugmentLHS</a></code>,
+<code><a href="../../lhs/html/optimumLHS.html">optimumLHS</a></code>
+Default is <code><a href="../../lhs/html/randomLHS.html">randomLHS</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>fun.args</code></td>
 <td>
-<p>[<code>list</code>]<br> List of further
-arguments passed to <code>fun</code>.</p>
+<p>[<code>list</code>]<br>
+List of further arguments passed to <code>fun</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>trafo</code></td>
 <td>
-<p>[<code>logical(1)</code>]<br> Transform all
-parameters by using theirs respective transformation
-functions.  Default is <code>FALSE</code>.</p>
-</td></tr>
-<tr valign="top"><td><code>ints.as.num</code></td>
-<td>
-<p>[<code>logical(1)</code>]<br> Should
-parameters of type &ldquo;integer&rdquo; or
-&ldquo;integervector&rdquo; generate numeric columns?  Default
-is <code>FALSE</code>.</p>
-</td></tr>
-<tr valign="top"><td><code>discretes.as.factor</code></td>
-<td>
-<p>[<code>logical(1)</code>]<br> Should
-discrete parameters have columns of type &ldquo;factor&rdquo;
-in result?  Otherwise character columns are generated.
-Default is <code>TRUE</code>.</p>
-</td></tr>
-<tr valign="top"><td><code>logicals.as.factor</code></td>
-<td>
-<p>[<code>logical(1)</code>]<br> Should
-logical parameters have columns of type &ldquo;factor&rdquo;
-in result?  Otherwise logical columns are generated.
+<p>[<code>logical(1)</code>]<br>
+Transform all parameters by using theirs respective transformation functions.
 Default is <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>augment</code></td>
+<td>
+<p>[<code>integer(1)</code>]<br>
+Duplicated values and forbidden regions in the parameter space can lead to the design
+becoming smaller than <code>n</code>. With this option it is possible to augment the design again
+to size <code>n</code>. It is not guaranteed that this always works (to full size)
+and <code>augment</code> specifies the number of tries to augment.
+If the the design is of size less than <code>n</code> after all tries, a warning is issued
+and the smaller design is returned.
+Default is 20.</p>
 </td></tr>
 </table>
 
 
 <h3>Value</h3>
 
-<p>The created design is a data.frame. Columns are named by
-the ids of the parameters.  If the <code>par.set</code>
-argument contains a vector parameter, its corresponding
-column names in the design are the parameter id
-concatenated with 1 to dimension of the vector.  The data
-type of a column is defined in the following way. Numeric
-parameters generate numeric columns, integer parameters
-generate numeric/integer columns, logical parameters
-generate logical/factor columns.  For discrete parameters
-the value names are used and character or factor columns
-are generated.  Dependent parameters whose constaints are
-unsatisfied generate <code>NA</code> entries in their
-respective columns.  The result will have an
-<code>logical(1)</code> attribute &ldquo;trafo&rdquo;, which is set
-to the value of argument <code>trafo</code>.
+<p>The created design is a data.frame. Columns are named by the ids of the parameters.
+If the <code>par.set</code> argument contains a vector parameter, its corresponding column names
+in the design are the parameter id concatenated with 1 to dimension of the vector.
+The result will have an <code>logical(1)</code> attribute &ldquo;trafo&rdquo;,
+which is set to the value of argument <code>trafo</code>.
 </p>
 
 
 <h3>Examples</h3>
 
-<pre><code class="r">
-ps &lt;- makeParamSet(
-  makeNumericParam(&quot;x1&quot;, lower=-2, upper=1),
-  makeIntegerParam(&quot;x2&quot;, lower=10, upper=20)
+<pre><code class="r">ps = makeParamSet(
+  makeNumericParam(&quot;x1&quot;, lower = -2, upper = 1),
+  makeIntegerParam(&quot;x2&quot;, lower = 10, upper = 20)
 )
 # random latin hypercube design with 5 samples:
 generateDesign(5, ps)
@@ -121,37 +157,33 @@ generateDesign(5, ps)
 <pre><code>## Loading required package: lhs
 </code></pre>
 
-<pre><code>##         x1 x2
-## 1 -1.14194 10
-## 2 -1.69883 16
-## 3  0.73411 20
-## 4  0.03218 13
-## 5 -0.66655 15
+<pre><code>##        x1 x2
+## 1  0.2402 10
+## 2 -0.3108 20
+## 3  0.6088 12
+## 4 -0.8706 15
+## 5 -1.5076 17
 </code></pre>
 
-<pre><code class="r">
-# with trafo
-ps &lt;- makeParamSet(
-  makeNumericParam(&quot;x&quot;, lower=-2, upper=1),
-  makeNumericVectorParam(&quot;y&quot;, len=2, lower=0, upper=1, trafo=function(x) x/sum(x))
+<pre><code class="r"># with trafo
+ps = makeParamSet(
+  makeNumericParam(&quot;x&quot;, lower = -2, upper = 1),
+  makeNumericVectorParam(&quot;y&quot;, len = 2, lower = 0, upper = 1, trafo = function(x) x/sum(x))
 )
-generateDesign(10, ps, trafo=TRUE)
+generateDesign(10, ps, trafo = TRUE)
 </code></pre>
 
-<pre><code>##          x     y1     y2
-## 1   0.8848 0.4320 0.5680
-## 2  -1.5681 0.5814 0.4186
-## 3  -1.3885 0.3524 0.6476
-## 4   0.6250 0.4280 0.5720
-## 5  -1.0600 0.4258 0.5742
-## 6   0.2881 0.8538 0.1462
-## 7  -0.4023 0.7576 0.2424
-## 8  -0.6993 0.5125 0.4875
-## 9  -1.7596 0.2031 0.7969
-## 10 -0.1648 0.5550 0.4450
-</code></pre>
-
-<pre><code class="r">
+<pre><code>##           x     y1      y2
+## 1  -0.43022 0.5229 0.47711
+## 2   0.64060 0.4866 0.51338
+## 3  -1.28223 0.1974 0.80262
+## 4   0.34936 0.6312 0.36883
+## 5  -0.94272 0.4807 0.51934
+## 6  -1.54880 0.3263 0.67366
+## 7  -0.57284 0.9343 0.06574
+## 8  -0.09629 0.1361 0.86387
+## 9   0.99170 0.7455 0.25451
+## 10 -1.84609 0.2469 0.75306
 </code></pre>
 
 

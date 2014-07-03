@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><title>R: Return lengths of parameters in parameter set.</title>
+<html><head><title>R: Return number of parameters in set.</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="R.css">
 
@@ -9,20 +9,20 @@
 <script>hljs.initHighlightingOnLoad();</script>
 </head><body>
 
-<table width="100%" summary="page for getParamLengths {ParamHelpers}"><tr><td>getParamLengths {ParamHelpers}</td><td align="right">R Documentation</td></tr></table>
+<table width="100%" summary="page for getParamNr {ParamHelpers}"><tr><td>getParamNr {ParamHelpers}</td><td align="right">R Documentation</td></tr></table>
 
-<h2>Return lengths of parameters in parameter set.</h2>
+<h2>Return number of parameters in set.</h2>
 
 <h3>Description</h3>
 
-<p>Useful for vector parameters.
+<p>Either number of parameters or sum over parameter lengths.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-getParamLengths(par.set)
+getParamNr(par.set, devectorize = FALSE)
 </pre>
 
 
@@ -34,12 +34,18 @@ getParamLengths(par.set)
 <p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br>
 Parameter set.</p>
 </td></tr>
+<tr valign="top"><td><code>devectorize</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br>
+Sum over length of vector parameters?
+Default is codeFALSE.</p>
+</td></tr>
 </table>
 
 
 <h3>Value</h3>
 
-<p>[<code>integer</code>]. Named and in same order as <code>par.set</code>.
+<p>[<code>integer</code>].
 </p>
 
 
@@ -47,18 +53,18 @@ Parameter set.</p>
 
 <pre><code class="r">ps = makeParamSet(
   makeNumericParam(&quot;u&quot;),
-  makeIntegerParam(&quot;v&quot;, lower = 1, upper = 2),
-  makeDiscreteParam(&quot;w&quot;, values = 1:2),
   makeDiscreteVectorParam(&quot;x&quot;, len = 2, values = c(&quot;a&quot;, &quot;b&quot;))
 )
-getParamLengths(ps)
+getParamNr(ps)
 </code></pre>
 
-<pre><code>## u v w x 
-## 1 1 1 2
+<pre><code>## [1] 2
 </code></pre>
 
-<pre><code class="r"># the length of the vector x is 2, for all other single value parameters the length is 1.
+<pre><code class="r">getParamNr(ps, devectorize = TRUE)
+</code></pre>
+
+<pre><code>## [1] 3
 </code></pre>
 
 

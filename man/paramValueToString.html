@@ -15,15 +15,16 @@
 
 <h3>Description</h3>
 
-<p>Useful helper for logging. For discrete parameter values
-always the name of the discrete value is used.
+<p>Useful helper for logging.
+For discrete parameter values always the name of the discrete value is used.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-  paramValueToString(par, x, show.missing.values = FALSE)
+paramValueToString(par, x, show.missing.values = FALSE,
+  num.format = "%.3g")
 </pre>
 
 
@@ -32,23 +33,27 @@ always the name of the discrete value is used.
 <table summary="R argblock">
 <tr valign="top"><td><code>par</code></td>
 <td>
-<p>[<code><a href="Param.html">Param</a></code> |
-<code><a href="makeParamSet.html">ParamSet</a></code>]<br> Parameter or parameter set.</p>
+<p>[<code><a href="Param.html">Param</a></code> | <code><a href="makeParamSet.html">ParamSet</a></code>]<br>
+Parameter or parameter set.</p>
 </td></tr>
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>[any]<br> Value for parameter or value for
-parameter set. In the latter case it must be named list.
-For discrete parameters their values must be used, not
-their names.</p>
+<p>[any]<br>
+Value for parameter or value for parameter set. In the latter case it must be named list.
+For discrete parameters their values must be used, not their names.</p>
 </td></tr>
 <tr valign="top"><td><code>show.missing.values</code></td>
 <td>
-<p>[<code>logical(1)</code>]<br> Display
-&ldquo;NA&rdquo; for parameters, which have no setting,
-because their requirements are not satified (dependent
-parameters), instead of displaying nothing?  Default is
-<code>FALSE</code>.</p>
+<p>[<code>logical(1)</code>]<br>
+Display &ldquo;NA&rdquo; for parameters, which have no setting, because their requirements are not
+satified (dependent parameters), instead of displaying nothing?
+Default is <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>num.format</code></td>
+<td>
+<p>[<code>character(1)</code>]<br>
+Number format for output of numeric parameters. See the details section of the manual for
+<code><a href="../../base/html/sprintf.html">sprintf</a></code> for details.</p>
 </td></tr>
 </table>
 
@@ -61,12 +66,11 @@ parameters), instead of displaying nothing?  Default is
 
 <h3>Examples</h3>
 
-<pre><code class="r">
-p &lt;- makeNumericParam(&quot;x&quot;)
+<pre><code class="r">p = makeNumericParam(&quot;x&quot;)
 paramValueToString(p, 1)
 </code></pre>
 
-<pre><code>## [1] &quot;1.00&quot;
+<pre><code>## [1] &quot;1&quot;
 </code></pre>
 
 <pre><code class="r">paramValueToString(p, 1.2345)
@@ -75,42 +79,47 @@ paramValueToString(p, 1)
 <pre><code>## [1] &quot;1.23&quot;
 </code></pre>
 
-<pre><code class="r">
-p &lt;- makeIntegerVectorParam(&quot;x&quot;, len=2)
+<pre><code class="r">paramValueToString(p, 0.000039)
+</code></pre>
+
+<pre><code>## [1] &quot;3.9e-05&quot;
+</code></pre>
+
+<pre><code class="r">paramValueToString(p, 8.13402, num.format = &quot;%.2f&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;8.13&quot;
+</code></pre>
+
+<pre><code class="r">p = makeIntegerVectorParam(&quot;x&quot;, len=2)
 paramValueToString(p, c(1L, 2L))
 </code></pre>
 
 <pre><code>## [1] &quot;1,2&quot;
 </code></pre>
 
-<pre><code class="r">
-p &lt;- makeLogicalParam(&quot;x&quot;)
+<pre><code class="r">p = makeLogicalParam(&quot;x&quot;)
 paramValueToString(p, TRUE)
 </code></pre>
 
 <pre><code>## [1] &quot;TRUE&quot;
 </code></pre>
 
-<pre><code class="r">
-p &lt;- makeDiscreteParam(&quot;x&quot;, values=list(a=NULL, b=2))
+<pre><code class="r">p = makeDiscreteParam(&quot;x&quot;, values=list(a=NULL, b=2))
 paramValueToString(p, NULL)
 </code></pre>
 
 <pre><code>## [1] &quot;a&quot;
 </code></pre>
 
-<pre><code class="r">
-ps &lt;- makeParamSet(
+<pre><code class="r">ps = makeParamSet(
   makeNumericVectorParam(&quot;x&quot;, len=2L),
   makeDiscreteParam(&quot;y&quot;, values=list(a=NULL, b=2))
 )
 paramValueToString(ps, list(x=c(1,2), y=NULL))
 </code></pre>
 
-<pre><code>## [1] &quot;x=1.00,2.00; y=a&quot;
-</code></pre>
-
-<pre><code class="r">
+<pre><code>## [1] &quot;x=1,2; y=a&quot;
 </code></pre>
 
 

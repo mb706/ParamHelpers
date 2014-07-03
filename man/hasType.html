@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Check whether parameter set contains a certain type.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for hasType {ParamHelpers}"><tr><td>hasType {ParamHelpers}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Check whether parameter set contains a certain type.</h2>
+
+<h3>Description</h3>
+
+<p><code>TRUE</code> iff the parameter set contains at least one parameter of the mentioned type x.
+Type x always subsumes x and x-vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+hasDiscrete(par.set)
+
+hasInteger(par.set)
+
+hasLogical(par.set)
+
+hasNumeric(par.set, include.int = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>par.set</code></td>
+<td>
+<p>[<code><a href="makeParamSet.html">ParamSet</a></code>]<br>
+Parameter set.</p>
+</td></tr>
+<tr valign="top"><td><code>include.int</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br>
+Are integers also considered to be numeric?
+Default is <code>TRUE</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>[<code>logical(1)</code>].
+</p>
+
+<hr><div align="center">[Package <em>ParamHelpers</em> version 1.2 <a href="00Index.html">Index</a>]</div>
+</body></html>
