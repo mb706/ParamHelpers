@@ -62,7 +62,15 @@ NULL
 makeOptPath = function(par.set, y.names, minimize, add.transformed.x = FALSE,
   include.error.message = FALSE, include.exec.time = FALSE, include.extra = FALSE) {
 
+  assertClass(par.set, "ParamSet")
+  assertCharacter(y.names)
+  assertLogical(minimize)
+  assertFlag(add.transformed.x)
+  assertFlag(include.error.message)
+  assertFlag(include.exec.time)
+  assertFlag(include.extra)
   n.y = length(y.names)
+
   ok = c("numeric", "integer", "numericvector", "integervector", "logical",
     "logicalvector", "discrete", "discretevector", "character", "charactervector")
   if(length(par.set$pars) > length(filterParams(par.set, type = ok)$pars))
@@ -80,29 +88,26 @@ makeOptPath = function(par.set, y.names, minimize, add.transformed.x = FALSE,
     names(minimize) = y.names
   if (any(c("dob", "eol", "error.message") %in% (union(x.names, y.names))))
     stop("'dob', 'eol' and 'error.message' are not allowed in parameter names or 'y.names'!")
-  ee = new.env()
-  ee$dob = ee$eol = integer(0)
-
-  # potentially init error.message and exec.time in env
-  ee$error.message = if (include.error.message) character(0L) else NULL
-  ee$exec.time = if (include.exec.time) numeric(0L) else NULL
-  ee$extra = if (include.extra) list() else NULL
+  options = list(
+      include.error.message = include.error.message,
+      include.exec.time = include.exec.time,
+      include.extra = include.extra)
 
   makeS3Obj("OptPath",
     par.set = par.set,
     y.names = y.names,
     minimize = minimize,
     add.transformed.x = add.transformed.x,
-    env = ee
+    options = options
   )
 }
 
 #' @export
 print.OptPath = function(x, ...) {
   n = getOptPathLength(x)
-  em = x$env$error.message
-  et = x$env$exec.time
-  ex = x$env$extra
+  em = getOptPathErrorMessages(x)
+  et = getOptPathExecTimes(x)
+  ex = getOptPathExtras(x)
   catf("Optimization path")
   catf("  Dimensions: x = %i/%i, y = %i",
     length(x$par.set$pars), sum(getParamLengths(x$par.set)), length(x$y.names))

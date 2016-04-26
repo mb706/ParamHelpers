@@ -109,6 +109,11 @@ getOptPathExecTimes = function(op, dob, eol) {
   UseMethod("getOptPathExecTimes")
 }
 
+# Used internally
+getOptPathExtras = function(op, dob, eol) {
+  UseMethod("getOptPathExtras")
+}
+
 #' Get column from the optimization path.
 #'
 #' @template arg_op
@@ -167,16 +172,16 @@ getOptPathCols = function(op, names, dob, eol, row.names = NULL) {
 #' as.data.frame(op)
 #' getOptPathBestIndex(op)
 #' getOptPathBestIndex(op, ties = "first")
-getOptPathBestIndex = function(op, y.name = op$y.names[1], dob = op$env$dob, eol = op$env$eol, ties = "last") {
+getOptPathBestIndex = function(op, y.name = op$y.names[1], dob = getOptPathDOB(op), eol = getOptPathEOL(op), ties = "last") {
   assertClass(op, "OptPath")
   assertChoice(y.name, choices = op$y.names)
   dob = asInteger(dob, any.missing = TRUE)
   eol = asInteger(eol, any.missing = TRUE)
   assertChoice(ties, c("all", "first", "last", "random"))
-  life.inds = which(op$env$dob %in% dob & op$env$eol %in% eol)
+  life.inds = which(getOptPathDOB(op) %in% dob & getOptPathEOL(op) %in% eol)
   if (length(life.inds) == 0)
     stop("No element found which matches dob and eol restrictions!")
-  y = getOptPathY(op, y.name)[life.inds]
+  y = getOptPathY(op, y.name, dob, eol)[life.inds]
   if (all(is.na(y))) {
     best.inds = life.inds
   } else {
@@ -225,7 +230,7 @@ getOptPathBestIndex = function(op, y.name = op$y.names[1], dob = op$env$dob, eol
 #' as.data.frame(op)
 #' getOptPathParetoFront(op)
 #' getOptPathParetoFront(op, index = TRUE)
-getOptPathParetoFront = function(op, y.names = op$y.names, dob = op$env$dob, eol = op$env$eol, index = FALSE) {
+getOptPathParetoFront = function(op, y.names = op$y.names, dob = getOptPathDOB(op), eol = getOptPathEOL(op), index = FALSE) {
   assertClass(op, "OptPath")
   assertCharacter(y.names, min.len = 2)
   assertSubset(y.names, op$y.names, empty.ok = FALSE)
@@ -233,7 +238,7 @@ getOptPathParetoFront = function(op, y.names = op$y.names, dob = op$env$dob, eol
   eol = asInteger(eol, any.missing = TRUE)
   assertFlag(index, na.ok = TRUE)
   requirePackages("emoa", default.method = "load")
-  life.inds = which(op$env$dob %in% dob & op$env$eol %in% eol)
+  life.inds = which(getOptPathDOB(op) %in% dob & getOptPathEOL(op) %in% eol)
   if (length(life.inds) == 0)
     stop("No element found which matches dob and eol restrictions!")
   y = getOptPathY(op, y.names, drop = FALSE)[life.inds, , drop = FALSE]

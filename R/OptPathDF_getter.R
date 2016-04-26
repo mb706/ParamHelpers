@@ -42,7 +42,7 @@ getOptPathY.OptPathDF = function(op, names, dob = op$env$dob, eol = op$env$eol, 
   if (missing(names))
     names = op$y.names
   else
-    c(names, subset = op$y.names)
+    assertSubset(names, op$y.names, empty.ok = FALSE)
   assertFlag(drop)
   y = as.matrix(op$env$path[getOptPathDobAndEolIndex(op, dob, eol), names, drop = FALSE])
   if (drop && length(names) == 1L)
@@ -68,6 +68,10 @@ getOptPathErrorMessages.OptPathDF = function(op, dob = op$env$dob, eol = op$env$
 #' @export
 getOptPathExecTimes.OptPathDF = function(op, dob = op$env$dob, eol = op$env$eol) {
   return(op$env$exec.time[getOptPathDobAndEolIndex(op, dob, eol)])
+}
+
+getOptPathExtras.OptPathDF = function(op, dob = op$env$dob, eol = op$env$eol) {
+  return(op$env$extra[getOptPathDobAndEolIndex(op, dob, eol)])
 }
 
 #' @export

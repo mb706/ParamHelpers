@@ -70,5 +70,20 @@ addOptPathEl.OptPathDF = function(op, x, y, dob = getOptPathLength(op)+1L, eol =
   return(invisible(NULL))
 }
 
+#' @export
+setOptPathElDOB.OptPathDF = function(op, index, dob) {
+  index = asInteger(index)
+  dob = asInteger(dob)
+  op$env$dob[index] = dob
+  return(invisible(NULL))
+}
+
+setOptPathElEOL.OptPathDF = function(op, index, eol) {
+  index = asInteger(index)
+  eol = asInteger(eol)
+  op$env$eol[index] = eol
+  return(invisible(NULL))
+}
+
 
 

@@ -9,11 +9,7 @@
 #' @export
 #' @family optpath
 setOptPathElDOB = function(op, index, dob) {
-  assertClass(op, "OptPath")
-  index = asInteger(index)
-  dob = asInteger(dob)
-  op$env$dob[index] = dob
-  return(invisible(NULL))
+  UseMethod("setOptPathElDOB")
 }
 
 
@@ -28,11 +24,7 @@ setOptPathElDOB = function(op, index, dob) {
 #' @export
 #' @family optpath
 setOptPathElEOL = function(op, index, eol) {
-  assertClass(op, "OptPath")
-  index = asInteger(index)
-  eol = asInteger(eol)
-  op$env$eol[index] = eol
-  return(invisible(NULL))
+  UseMethod("setOptPathElEOL")
 }
 
 #' @title Add a new element to an optimization path.
