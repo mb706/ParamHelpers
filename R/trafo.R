@@ -31,9 +31,12 @@ trafoValue = function(par, x) {
 
 #' Transform optimization path.
 #'
-#' Transform optimization path with associated transformation functions of parameters.
-#' Can only be done when x values where added \dQuote{untransformed}.
-#'
+#' Transform optimization path with associated transformation functions of
+#' parameters. Can only be done when x values where added
+#' \dQuote{untransformed}. The resulting object will always be a
+#' \code{OptPathDF} (dataframe backed \code{OptPath}); if a database backed
+#' \code{OptPathDB} is needed, use \code{link{as.OptPathDB}} on the result.
+#' 
 #' @param opt.path [\code{\link{OptPath}}]\cr
 #'   Optimization path.
 #' @return [\code{\link{OptPath}}].
@@ -56,7 +59,6 @@ trafoOptPath = function(opt.path) {
   if (opt.path$add.transformed.x)
     stop("Cannot further trafo opt.path, you already added transformed x values to it!")
   ps = opt.path$par.set
-  # FIXME: this only works for the DF implementation!
   op2 = makeOptPathDF(opt.path$par.set, opt.path$y.names, opt.path$minimize, add.transformed.x = TRUE)
   lapply(1:getOptPathLength(opt.path), function(i) {
     z = getOptPathEl(opt.path, i)
